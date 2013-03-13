@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/report"
+          android:showAsAction="always"
+          android:title="REPORT"/>
+
+    <item android:id="@+id/settings"
+          android:showAsAction="always"
+          android:title="Settings"
+          android:icon="@drawable/settings_logo"/>
+
+</menu>
