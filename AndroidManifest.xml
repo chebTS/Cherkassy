@@ -24,11 +24,13 @@
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name=".Activity.ReportActivity">
+            android:name=".Activity.ReportActivity"
+            android:label="@string/report">
          </activity>
          <activity
             android:screenOrientation="portrait"
-            android:name=".Activity.SettingsActivity">
+            android:name=".Activity.SettingsActivity"
+            android:label="@string/settings">
          </activity>
     </application>
 

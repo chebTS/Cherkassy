@@ -3,6 +3,7 @@ package org.geekhub.cherkassy.Activity;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.Fragments.CategoryListFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -17,7 +18,10 @@ public class CategoryListActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.category_list_act);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.category_list_frag, new CategoryListFragment()).commit();
+            getSupportFragmentManager()
+            		.beginTransaction()
+            		.add(R.id.category_list_frag, new CategoryListFragment())
+            		.commit();
         }
     }
 
@@ -30,11 +34,11 @@ public class CategoryListActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.report:
-			
+		case R.id.report://start report activity
+			startActivity(new Intent(this, ReportActivity.class));
 			break;
-		case R.id.settings:
-			
+		case R.id.settings: //start settings activity
+			startActivity(new Intent(this, SettingsActivity.class));
 			break;
 		default:
 			break;
