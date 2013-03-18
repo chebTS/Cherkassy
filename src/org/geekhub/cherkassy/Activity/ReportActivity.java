@@ -6,6 +6,7 @@ import org.geekhub.cherkassy.Fragments.ReportFragment;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 
 public class ReportActivity extends SherlockFragmentActivity {
 	
@@ -21,4 +22,6 @@ public class ReportActivity extends SherlockFragmentActivity {
             		.commit();
         }
 	}
+	
+	
 }
