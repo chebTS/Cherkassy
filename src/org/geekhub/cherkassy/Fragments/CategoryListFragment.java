@@ -23,10 +23,10 @@ public class CategoryListFragment extends SherlockFragment{
         return inflater.inflate(R.layout.category_list_frag,container,false);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.category_list_menu,menu);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.category_list_menu,menu);
+//    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

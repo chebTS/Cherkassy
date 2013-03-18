@@ -1,9 +1,13 @@
 package org.geekhub.cherkassy.Activity;
 
-import android.os.Bundle;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import org.geekhub.cherkassy.Fragments.CategoryListFragment;
 import org.geekhub.cherkassy.R;
+import org.geekhub.cherkassy.Fragments.CategoryListFragment;
+
+import android.os.Bundle;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class CategoryListActivity extends SherlockFragmentActivity {
 
@@ -17,6 +21,28 @@ public class CategoryListActivity extends SherlockFragmentActivity {
         }
     }
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.category_list_menu,menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.report:
+			
+			break;
+		case R.id.settings:
+			
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	
 
 
 }
