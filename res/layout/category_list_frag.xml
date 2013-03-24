@@ -13,11 +13,11 @@
             android:layout_height="150dp"
             android:adjustViewBounds="true"
             android:background="@drawable/ck_logo" />
-    <ListView
+    <GridView
             android:id="@+id/listMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    </ListView>
+    </GridView>
 
 </LinearLayout>

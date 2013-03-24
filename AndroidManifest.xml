@@ -17,25 +17,31 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock" >
+
         <activity
             android:screenOrientation="portrait"
-            android:name=".Activity.CategoryListActivity"
+            android:name=".activity.CategoryListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:screenOrientation="portrait"
-            android:name=".Activity.ReportActivity"
+            android:name=".activity.ReportActivity"
             android:label="@string/report">
          </activity>
+
          <activity
             android:screenOrientation="portrait"
-            android:name=".Activity.SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/settings">
          </activity>
+
+    <provider android:name=".db.InfoContentProvider"
+                  android:authorities="org.geekhub.cherkassy.db"/>
     </application>
 
 </manifest>

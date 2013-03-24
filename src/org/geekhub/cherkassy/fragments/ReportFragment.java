@@ -1,4 +1,4 @@
-package org.geekhub.cherkassy.Fragments;
+package org.geekhub.cherkassy.fragments;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

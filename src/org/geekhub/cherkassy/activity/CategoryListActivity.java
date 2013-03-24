@@ -1,7 +1,7 @@
-package org.geekhub.cherkassy.Activity;
+package org.geekhub.cherkassy.activity;
 
 import org.geekhub.cherkassy.R;
-import org.geekhub.cherkassy.Fragments.CategoryListFragment;
+import org.geekhub.cherkassy.fragments.CategoryListFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
