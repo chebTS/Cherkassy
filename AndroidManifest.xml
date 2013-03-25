@@ -39,6 +39,12 @@
             android:name=".activity.SettingsActivity"
             android:label="@string/settings">
          </activity>
+          <activity
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:name=".activity.MapActivity"
+            android:label="@string/map">
+         </activity>
 
     <provider android:name=".db.InfoContentProvider"
                   android:authorities="org.geekhub.cherkassy.db"/>

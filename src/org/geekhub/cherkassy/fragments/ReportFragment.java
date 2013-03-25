@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import org.geekhub.cherkassy.R;
+import org.geekhub.cherkassy.activity.MapActivity;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -93,6 +94,9 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 		        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
 		        startActivityForResult(intent, SELECT_CAMERA);
+				break;
+			case R.id.map:
+				startActivity(new Intent(getSherlockActivity(), MapActivity.class));
 				break;
 		}
 		return super.onOptionsItemSelected(item);
