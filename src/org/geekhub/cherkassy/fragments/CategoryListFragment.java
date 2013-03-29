@@ -30,11 +30,11 @@ public class CategoryListFragment extends SherlockFragment{
     public void onStart() {
         super.onStart();
         setHasOptionsMenu(true);
-        adapter = new ArrayAdapter<String>(getActivity(), R.layout.grid_view, R.id.tvText, Const.MENU_LIST);
+        /*adapter = new ArrayAdapter<String>(getActivity(), R.layout.grid_view, R.id.tvText, Const.MENU_LIST);
         GridView gvMain = (GridView) getActivity().findViewById(R.id.listMain);
         gvMain.setAdapter(adapter);
 
-        gvMain.setNumColumns(gvMain.AUTO_FIT);
+        gvMain.setNumColumns(gvMain.AUTO_FIT);*/
         ParseToDB();
     }
 
