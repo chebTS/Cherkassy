@@ -1,23 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <ImageView
-            android:id="@+id/imgLogo"
+    <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ck_logo" />
-    <GridView
-            android:id="@+id/listMain"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:shrinkColumns="*">
 
-    </GridView>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</LinearLayout>
+            <!--suppress AndroidLintContentDescription -->
+            <ImageView
+                    android:id="@+id/imgLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_span="2"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ck_logo"/>
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="Fastfoods"
+                    android:background="@drawable/building"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="Restaurants"
+                    android:background="@drawable/building"/>
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="Cinemas"
+                    android:background="@drawable/building"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="Hotels"
+                    android:background="@drawable/building"/>
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="Universities"
+                    android:background="@drawable/building"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:text="Others"
+                    android:background="@drawable/building"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>
