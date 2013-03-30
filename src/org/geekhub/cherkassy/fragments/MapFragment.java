@@ -1,19 +1,14 @@
 package org.geekhub.cherkassy.fragments;
 
-import org.geekhub.cherkassy.R;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.maps.GeoPoint;
+import org.geekhub.cherkassy.R;
 
 public class MapFragment extends SherlockFragment  {
 	private MapView mMapView;
