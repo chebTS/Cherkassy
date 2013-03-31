@@ -38,6 +38,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="Fastfoods"
+                    android:id="@+id/fastfoods"
                     android:background="@drawable/building"/>
 
             <TextView
@@ -48,6 +49,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="Restaurants"
+                    android:id="@+id/restaurants"
                     android:background="@drawable/building"/>
 
         </TableRow>
@@ -64,6 +66,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="Cinemas"
+                    android:id="@+id/cinemas"
                     android:background="@drawable/building"/>
 
             <TextView
@@ -74,6 +77,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="Hotels"
+                    android:id="@+id/hotels"
                     android:background="@drawable/building"/>
 
         </TableRow>
@@ -90,6 +94,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="Universities"
+                    android:id="@+id/universities"
                     android:background="@drawable/building"/>
 
             <TextView
@@ -100,6 +105,7 @@
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="Others"
+                    android:id="@+id/others"
                     android:background="@drawable/building"/>
 
         </TableRow>

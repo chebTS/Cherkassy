@@ -8,7 +8,7 @@
     <string name="map">Map</string>
     <string name="report">"Report an issue"</string>
     <string name="send">"Send report"</string>
-    
+    <string name="item">"Item"</string>
     
 
 </resources>

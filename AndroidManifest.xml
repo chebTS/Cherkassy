@@ -57,6 +57,13 @@
             android:name=".activity.SettingsActivity"
             android:label="@string/settings">
          </activity>
+
+        <activity
+                android:screenOrientation="portrait"
+                android:name=".activity.ItemListActivity"
+                android:label="@string/item">
+        </activity>
+
           <activity
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
