@@ -1,6 +1,7 @@
 package org.geekhub.cherkassy.fragments;
 
 import org.geekhub.cherkassy.R;
+import org.geekhub.cherkassy.activity.MapActivity;
 
 import android.content.Context;
 import android.location.Location;
@@ -30,7 +31,38 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
-	private LatLng issuePosition;
+	private  MapActivity mapActivity;
+	
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		mapActivity = (MapActivity)getSherlockActivity();
+		mMap.setMyLocationEnabled(true);	        
+        mMap.setOnMapClickListener(new OnMapClickListener() {
+			@Override
+			public void onMapClick(LatLng latlng) {
+				mMap.clear();
+				mMap.addMarker(new MarkerOptions().position(latlng).snippet("Location"));
+				mapActivity.setIssuePosition(latlng);
+			}
+		});
+        
+        try {
+            MapsInitializer.initialize(getSherlockActivity());
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+        locationManager = (LocationManager) getSherlockActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER        
+
+	}
+
+
+
+
+
+
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,24 +71,7 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
 			mMapView = (MapView) v.findViewById(R.id.map);
 	        mMapView.onCreate(mBundle);
 	        mMap = ((MapView) v.findViewById(R.id.map)).getMap();
-	        mMap.setMyLocationEnabled(true);	        
-	        mMap.setOnMapClickListener(new OnMapClickListener() {
-				@Override
-				public void onMapClick(LatLng latlng) {
-					mMap.clear();
-					issuePosition = latlng;
-					mMap.addMarker(new MarkerOptions().position(latlng).snippet("Location"));	
-				}
-			});
-	        
-	        try {
-	            MapsInitializer.initialize(getSherlockActivity());
-	        } catch (GooglePlayServicesNotAvailableException e) {
-	            e.printStackTrace();
-	        }
-	        locationManager = (LocationManager) getSherlockActivity().getSystemService(Context.LOCATION_SERVICE);
-	        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER        
-
+	       
 
 	        //mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(37.412259, -79.138257) , 13.0f) );
 	        //mMap.setOnInfoWindowClickListener(this);

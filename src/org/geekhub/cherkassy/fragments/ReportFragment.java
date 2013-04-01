@@ -22,6 +22,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -32,10 +34,13 @@ import com.actionbarsherlock.view.MenuItem;
 public class ReportFragment extends SherlockFragment implements OnClickListener{
 	private static final int SELECT_CAMERA = 101;
 	private static final int SELECT_GALERY = 102;
+	private static final int SELECT_MAP = 103;
 	ImageView imgPhoto;
+	TextView txtLatLng;
 	Button btnSend;
 	SherlockFragmentActivity actReport;
 	Uri imageUri;
+	Double lat, lng;
 	
 	
 	
@@ -57,14 +62,19 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		View v = inflater.inflate(R.layout.report_frag,container,false);
 		imgPhoto = (ImageView)v.findViewById(R.id.imgPhoto);
 		btnSend  = (Button)v.findViewById(R.id.btnSend);
+		txtLatLng = (TextView)v.findViewById(R.id.txtLatLng);
         return v;
     }
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btnSend:
-			
+		case R.id.btnSend:	
+			if ((lat==null)||(lng==null)){
+				Toast.makeText(getSherlockActivity(), "Please set issue location", Toast.LENGTH_LONG).show();
+			}else{
+				//TODO send 
+			}
 			break;
 		default:
 			break;
@@ -96,7 +106,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		        startActivityForResult(intent, SELECT_CAMERA);
 				break;
 			case R.id.map:
-				startActivity(new Intent(getSherlockActivity(), MapActivity.class));
+				startActivityForResult(new Intent(getSherlockActivity(), MapActivity.class), SELECT_MAP);
 				break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -121,8 +131,20 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	    	if(resultCode == Activity.RESULT_OK){ 	    		
 	    		setImage(imageUri);	    		
 	    	}
+	    	break;	
+	    case SELECT_MAP:
+	    	Log.i("Select map result","__");
+	    	
+	    	if (data!=null){
+	    		if(data.hasExtra("lat")&&(data.hasExtra("lng"))){
+	    			lat = data.getExtras().getDouble("lat");
+	    			lng = data.getExtras().getDouble("lng");
+	    			txtLatLng.setText(lat.toString() + " : " +lng.toString());
+	    		}
+	    	}
 	    	break;
 	    }
+		
 	}
 
 	
