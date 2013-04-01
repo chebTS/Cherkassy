@@ -93,6 +93,8 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		}
 	}	
 	
+	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
