@@ -33,17 +33,54 @@ public class CategoryListFragment extends SherlockFragment{
         setHasOptionsMenu(true);
         ParseToDB();
 
-        //Only for 1:
-        TextView textView = (TextView) getView().findViewById(R.id.fastfoods);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ItemListActivity.class);
-                intent.putExtra("category","fast-food");
-                startActivity(intent);
-            }
-        });
+
+        //It needs refactoring
+        TextView textView1 = (TextView) getView().findViewById(R.id.fastfoods);
+        textView1.setOnClickListener(onButtonClick);
+
+        TextView textView2 = (TextView) getView().findViewById(R.id.others);
+        textView2.setOnClickListener(onButtonClick);
+
+        TextView textView3 = (TextView) getView().findViewById(R.id.hotels);
+        textView3.setOnClickListener(onButtonClick);
+
+        TextView textView4 = (TextView) getView().findViewById(R.id.cinemas);
+        textView4.setOnClickListener(onButtonClick);
+
+        TextView textView5 = (TextView) getView().findViewById(R.id.restaurants);
+        textView5.setOnClickListener(onButtonClick);
+
+        TextView textView6 = (TextView) getView().findViewById(R.id.universities);
+        textView6.setOnClickListener(onButtonClick);
     }
+
+    private View.OnClickListener onButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), ItemListActivity.class);
+            switch (view.getId()){
+                case R.id.fastfoods:
+                    intent.putExtra("category","fast-food");
+                    break;
+                case R.id.restaurants:
+                    intent.putExtra("category","restorans");
+                    break;
+                case R.id.cinemas:
+                    intent.putExtra("category","movies");
+                    break;
+                case R.id.hotels:
+                    intent.putExtra("category","hotels");
+                    break;
+                case R.id.universities:
+                    intent.putExtra("category","universities");
+                    break;
+                case R.id.others:
+                    intent.putExtra("category","other");
+                    break;
+            }
+            startActivity(intent);
+        }
+    };
 
     private void ParseToDB() {
         new Thread(new Runnable() {
