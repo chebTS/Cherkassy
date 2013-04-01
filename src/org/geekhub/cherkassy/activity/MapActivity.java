@@ -10,12 +10,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.maps.model.LatLng;
 
-
-
 public class MapActivity extends SherlockFragmentActivity {
-	private  LatLng issuePosition;
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +27,9 @@ public class MapActivity extends SherlockFragmentActivity {
             		.add(R.id.map_frag, new MapFragment())
             		.commit();
         }
-		
-	 
-	}
-	public LatLng getIssuePosition() {
-		return issuePosition;
 	}
 
 	public void setIssuePosition(LatLng issuePosition) {
-		this.issuePosition = issuePosition;
 		Intent intent = new Intent();
 	    intent.putExtra("lat", issuePosition.latitude);
 	    intent.putExtra("lng", issuePosition.longitude);
@@ -58,8 +47,4 @@ public class MapActivity extends SherlockFragmentActivity {
         	return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
-	
-	
 }

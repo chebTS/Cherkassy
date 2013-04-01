@@ -32,8 +32,7 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
 	private  MapActivity mapActivity;
-	
-	
+		
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -46,23 +45,17 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
 				mMap.addMarker(new MarkerOptions().position(latlng).snippet("Location"));
 				mapActivity.setIssuePosition(latlng);
 			}
-		});
-        
+		});        
         try {
             MapsInitializer.initialize(getSherlockActivity());
         } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(49.432259, 32.074257) , 10.0f) );
         locationManager = (LocationManager) getSherlockActivity().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER        
 
 	}
-
-
-
-
-
-
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,28 +64,16 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
 			mMapView = (MapView) v.findViewById(R.id.map);
 	        mMapView.onCreate(mBundle);
 	        mMap = ((MapView) v.findViewById(R.id.map)).getMap();
-	       
-
-	        //mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(37.412259, -79.138257) , 13.0f) );
-	        //mMap.setOnInfoWindowClickListener(this);
-	        //addMarkers();
 		}
         return v;
     }
-	
-	
-	
-	
-	
-
 
 	@Override
 	public void onLocationChanged(Location location) {
 		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 	    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
 	    mMap.animateCamera(cameraUpdate);
-	    locationManager.removeUpdates(this);
-		
+	    locationManager.removeUpdates(this);		
 	}
 
 	@Override
@@ -123,12 +104,5 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     public void onDestroy() {
         mMapView.onDestroy();
         super.onDestroy();
-    }
-	
-//	@Override
-//	public void onInfoWindowClick(Marker paramMarker) {
-//		
-//		
-//		Toast.makeText(mActivity, "Info " + paramMarker.getId() , Toast.LENGTH_LONG).show();
-//	}	
+    }	
 }

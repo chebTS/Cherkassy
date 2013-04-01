@@ -42,8 +42,6 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	Uri imageUri;
 	Double lat, lng;
 	
-	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -143,10 +141,8 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	    		}
 	    	}
 	    	break;
-	    }
-		
+	    }		
 	}
-
 	
 	private Boolean setImage(Uri uri){
 		try{
@@ -183,5 +179,4 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 			return false;
 		}
 	}
-
 }
