@@ -39,6 +39,7 @@
                     android:textSize="20sp"
                     android:text="Fastfoods"
                     android:id="@+id/fastfoods"
+                    android:onClick="onButtonClick"
                     android:background="@drawable/building"/>
 
             <TextView
