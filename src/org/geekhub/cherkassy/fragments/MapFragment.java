@@ -17,9 +17,11 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends SherlockFragment  implements LocationListener{
 	private MapView mMapView;
@@ -28,7 +30,7 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
-	
+	private LatLng issuePosition;
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +40,14 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
 	        mMapView.onCreate(mBundle);
 	        mMap = ((MapView) v.findViewById(R.id.map)).getMap();
 	        mMap.setMyLocationEnabled(true);	        
-	        
+	        mMap.setOnMapClickListener(new OnMapClickListener() {
+				@Override
+				public void onMapClick(LatLng latlng) {
+					mMap.clear();
+					issuePosition = latlng;
+					mMap.addMarker(new MarkerOptions().position(latlng).snippet("Location"));	
+				}
+			});
 	        
 	        try {
 	            MapsInitializer.initialize(getSherlockActivity());

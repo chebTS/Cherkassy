@@ -11,10 +11,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 
 public class MapActivity extends SherlockFragmentActivity {
-	private LocationManager locationManager;
-	private static final long MIN_TIME = 400;
-	private static final float MIN_DISTANCE = 1000;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

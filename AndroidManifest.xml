@@ -67,7 +67,7 @@
           <activity
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:name=".activity.MapActivity"
+            android:name=".activity.MapActivity"            
             android:label="@string/map">
          </activity>
 
