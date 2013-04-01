@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	ImageView imgPhoto;
 	TextView txtLatLng;
 	Button btnSend;
+	EditText edtDescription;
 	SherlockFragmentActivity actReport;
 	Uri imageUri;
 	Double lat, lng;
@@ -61,6 +63,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		imgPhoto = (ImageView)v.findViewById(R.id.imgPhoto);
 		btnSend  = (Button)v.findViewById(R.id.btnSend);
 		txtLatLng = (TextView)v.findViewById(R.id.txtLatLng);
+		edtDescription = (EditText)v.findViewById(R.id.edtDescription);
         return v;
     }
 	
@@ -71,7 +74,18 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 			if ((lat==null)||(lng==null)){
 				Toast.makeText(getSherlockActivity(), "Please set issue location", Toast.LENGTH_LONG).show();
 			}else{
-				//TODO send 
+				String aEmailList[] = { "chebTS@gmail.com" }; 
+				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); //This is the email intent
+				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList); // adds the address to the intent
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Cherkassy issue");//the subject				 
+				emailIntent.setType("plain/text");				 
+				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "On location " + txtLatLng.getText().toString()+
+						"\nThere is an issue \n"
+						+ edtDescription.getText().toString()
+						); 
+				//TODO add picture
+				startActivity(emailIntent);
+				//TODO reset text, imageview and coordinates;
 			}
 			break;
 		default:

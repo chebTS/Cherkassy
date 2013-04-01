@@ -23,8 +23,8 @@
 	        android:lines="1"
 	        android:singleLine="true"/>
 	    <EditText 
+	        android:id="@+id/edtDescription"
 	        android:layout_margin="5dp"
-	        android:id="@+id/txtComment"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:lines="3"/>
