@@ -1,10 +1,14 @@
 package org.geekhub.cherkassy.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.ItemActivity;
 import org.geekhub.cherkassy.db.DatabaseHelper;
 import org.geekhub.cherkassy.db.InfoTable;
+import org.geekhub.cherkassy.helpers.ItemListAdapter;
 
 public class ItemListFragment extends SherlockFragment {
 
@@ -40,7 +45,11 @@ public class ItemListFragment extends SherlockFragment {
         Cursor cursor = database.query(InfoTable.TABLE_ITEMS, null, InfoTable.COLUMN_CATEGORY + "='" + category + "'", null,null,null,null);
 
         getActivity().startManagingCursor(cursor);
-        SimpleCursorAdapter scAdapter = new SimpleCursorAdapter(getActivity(),R.layout.itemlist_adapter,cursor,new String[]{InfoTable.COLUMN_NAME},new int[]{R.id.item_text});
+
+        String[] from = new String[] {InfoTable.COLUMN_NAME };
+        int[] to = new int[] { R.id.name_item };
+
+        ItemListAdapter scAdapter = new ItemListAdapter(getActivity(),R.layout.item_adapter,cursor,from,to,getCurrentLocation());
         lv = (ListView) getView().findViewById(R.id.item_list);
         lv.setAdapter(scAdapter);
 
@@ -58,4 +67,29 @@ public class ItemListFragment extends SherlockFragment {
             }
         });
     }
+
+     private Location getCurrentLocation() {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        String providerName = locationManager.getBestProvider(criteria, true);
+
+         locationManager.requestLocationUpdates(providerName, 100, 1, new LocationListener() {
+             @Override
+             public void onLocationChanged(Location location) {}
+
+             @Override
+             public void onStatusChanged(String s, int i, Bundle bundle) {}
+
+             @Override
+             public void onProviderEnabled(String s) {}
+
+             @Override
+             public void onProviderDisabled(String s) {}
+
+         });
+         Location loc = locationManager.getLastKnownLocation(providerName);
+        return loc;
+    }
+
 }
