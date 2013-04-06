@@ -32,7 +32,7 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
 	private  MapActivity mapActivity;
-		
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

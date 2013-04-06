@@ -35,7 +35,7 @@
         <meta-data
 		    android:name="com.google.android.maps.v2.API_KEY"
 		    android:value="AIzaSyB3uuQZ5g8GWFVRdgWpjmQ6YD12tZSWBR0"/>
-        
+
         <activity
             android:screenOrientation="portrait"
             android:name=".activity.CategoryListActivity"
@@ -73,7 +73,7 @@
           <activity
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:name=".activity.MapActivity"            
+            android:name=".activity.MapActivity"
             android:label="@string/map">
          </activity>
 

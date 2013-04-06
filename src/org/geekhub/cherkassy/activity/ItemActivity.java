@@ -2,12 +2,14 @@ package org.geekhub.cherkassy.activity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.internal.widget.IcsColorDrawable;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.db.DatabaseHelper;
 import org.geekhub.cherkassy.db.InfoTable;
@@ -26,7 +28,7 @@ public class ItemActivity extends SherlockFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_act);
-
+        getSupportActionBar().setBackgroundDrawable(new IcsColorDrawable(Color.parseColor("#5F9EA0")));
         id = getIntent().getIntExtra("ID",0);
         category = getIntent().getStringExtra("category");
 
@@ -40,7 +42,7 @@ public class ItemActivity extends SherlockFragmentActivity {
             mViewPager.setAdapter(mMyFragmentPagerAdapter);
         }
     }
-
+                                                                                                  //arraylist fragment
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
         public MyFragmentPagerAdapter(FragmentManager fm) {

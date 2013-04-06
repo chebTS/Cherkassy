@@ -9,11 +9,15 @@
     <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:shrinkColumns="*">
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
+            android:background="#FFFFFF">
 
         <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                >
 
             <!--suppress AndroidLintContentDescription -->
             <ImageView
@@ -27,87 +31,197 @@
         </TableRow>
 
         <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="Fastfoods"
-                    android:id="@+id/fastfoods"
-                    android:onClick="onButtonClick"
-                    android:background="@drawable/building"/>
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="Restaurants"
-                    android:id="@+id/restaurants"
-                    android:background="@drawable/building"/>
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:paddingTop="70dp"
+                        android:text="Fastfoods"
+                        android:id="@+id/fastfoods"
+                        android:background="#ed8515"></TextView>
+
+                <ImageView
+                        android:background="@drawable/fastfood"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="75dp"
+                        android:layout_width="75dp"/>/>
+
+            </FrameLayout>
+
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:paddingTop="70dp"
+                        android:text="Restaurants"
+                        android:id="@+id/restaurants"
+                        android:background="#157DEC"/>
+
+                <ImageView
+                        android:background="@drawable/restr"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="75dp"
+                        android:layout_width="75dp"/>/>
+
+            </FrameLayout>
 
         </TableRow>
 
         <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="Cinemas"
-                    android:id="@+id/cinemas"
-                    android:background="@drawable/building"/>
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="Hotels"
-                    android:id="@+id/hotels"
-                    android:background="@drawable/building"/>
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:text="Cinemas"
+                        android:paddingTop="70dp"
+                        android:id="@+id/cinemas"
+                        android:background="#800517"/>
+
+                <ImageView
+                        android:background="@drawable/cinemas"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="75dp"
+                        android:layout_width="75dp"/>/>
+
+            </FrameLayout>
+
+
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:paddingTop="70dp"
+                        android:textSize="20sp"
+                        android:text="Hotels"
+                        android:id="@+id/hotels"
+                        android:background="#05806d"/>
+
+                <ImageView
+                        android:background="@drawable/hotels"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="75dp"
+                        android:layout_width="75dp"/>/>
+
+            </FrameLayout>
+
 
         </TableRow>
 
         <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="Universities"
-                    android:id="@+id/universities"
-                    android:background="@drawable/building"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="Others"
-                    android:id="@+id/others"
-                    android:background="@drawable/building"/>
+
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:paddingTop="70dp"
+                        android:textSize="20sp"
+                        android:text="Universities"
+                        android:id="@+id/universities"
+                        android:background="#347C17"/>
+
+                <ImageView
+                        android:background="@drawable/univers"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="75dp"
+                        android:layout_width="75dp"/>/>
+
+            </FrameLayout>
+
+
+
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:paddingTop="70dp"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:text="Others"
+                        android:id="@+id/others"
+                        android:background="#FBB117"/>
+
+                <ImageView
+                        android:background="@drawable/others"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="75dp"
+                        android:layout_width="75dp"/>/>
+
+            </FrameLayout>
 
         </TableRow>
 

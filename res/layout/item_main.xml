@@ -5,12 +5,12 @@
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
-    <ImageView 
+    <ImageView
         android:background="@drawable/ic_launcher"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"/>
 
-    <TextView 
+    <TextView
         android:id="@+id/txtTitle"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
