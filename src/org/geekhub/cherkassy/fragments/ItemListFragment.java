@@ -106,7 +106,7 @@ public class ItemListFragment extends SherlockFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
-                int id = cursor.getInt(cursor.getColumnIndex(InfoTable.COLUMN_ID));
+                long id = cursor.getInt(cursor.getColumnIndex(InfoTable.COLUMN_ID));
                 String category = cursor.getString(cursor.getColumnIndex(InfoTable.COLUMN_CATEGORY));
                 Intent intent = new Intent(getActivity(), ItemActivity.class);
                 intent.putExtra("ID", id);
@@ -117,24 +117,13 @@ public class ItemListFragment extends SherlockFragment {
         });
     }
 
-
-  /*
-    private Cursor sortByDistance(Cursor cursor) {
-      while (!cursor.isLast()) {
-          ArrayList<Info> elementList=  new ArrayList<Info>();
-          elementList.add(cursor.get)
-      }
-    }
-
-    */
-
      private Location getCurrentLocation() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         String providerName = locationManager.getBestProvider(criteria, true);
 
-         locationManager.requestLocationUpdates(providerName, 100, 1, new LocationListener() {
+         locationManager.requestLocationUpdates(providerName, 100, 10, new LocationListener() {
              @Override
              public void onLocationChanged(Location location) {}
 
@@ -142,7 +131,8 @@ public class ItemListFragment extends SherlockFragment {
              public void onStatusChanged(String s, int i, Bundle bundle) {}
 
              @Override
-             public void onProviderEnabled(String s) {}
+             public void onProviderEnabled(String s) {
+             }
 
              @Override
              public void onProviderDisabled(String s) {}

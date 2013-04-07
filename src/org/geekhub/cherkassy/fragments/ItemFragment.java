@@ -19,19 +19,10 @@ public class ItemFragment extends SherlockFragment {
         return inflater.inflate(R.layout.item_frag,container,false);
     }
 
-    public static ItemFragment newInstance(long item_id) {
-
-        ItemFragment itemFragment = new ItemFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong("ITEMID", item_id);
-        itemFragment.setArguments(bundle);
-        return itemFragment;
-    }
-
     @Override
     public void onStart() {
         super.onStart();
-        Long item_id = getArguments().getLong("ITEMID", 0);
+        long item_id =  getActivity().getIntent().getLongExtra("ID",0);
 
         DatabaseHelper dbHelper = new DatabaseHelper(getActivity());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
