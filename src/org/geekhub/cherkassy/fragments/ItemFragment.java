@@ -22,7 +22,7 @@ public class ItemFragment extends SherlockFragment {
     @Override
     public void onStart() {
         super.onStart();
-        long item_id =  getActivity().getIntent().getLongExtra("ID",0);
+        long item_id =  getActivity().getIntent().getLongExtra("ID", 0);
 
         DatabaseHelper dbHelper = new DatabaseHelper(getActivity());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
