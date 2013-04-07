@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/search_listitem"
+          android:showAsAction="withText|always|collapseActionView"
+          android:actionLayout="@layout/collapsible_edittext"
+          android:icon="@drawable/search"/>
+
+
+</menu>

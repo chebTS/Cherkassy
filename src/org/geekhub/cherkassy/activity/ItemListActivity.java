@@ -2,6 +2,7 @@ package org.geekhub.cherkassy.activity;
 
 import android.os.Bundle;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.fragments.ItemListFragment;
 
@@ -20,4 +21,9 @@ public class ItemListActivity extends SherlockFragmentActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.itemlist_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }
