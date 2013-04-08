@@ -32,5 +32,6 @@ public class ItemFragment extends SherlockFragment {
 
         TextView tw = (TextView) getView().findViewById(R.id.item_title);
         tw.setText(category);
+        
     }
 }

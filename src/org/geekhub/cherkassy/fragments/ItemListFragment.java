@@ -24,6 +24,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.ItemActivity;
 import org.geekhub.cherkassy.db.DatabaseHelper;
+import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
 import org.geekhub.cherkassy.helpers.ItemListAdapter;
 
@@ -79,11 +80,29 @@ public class ItemListFragment extends SherlockFragment {
         });
     }
 
+    
     public void getListFromDB(String text) {
         DatabaseHelper dbHelper = new DatabaseHelper(getActivity());
         database = dbHelper.getReadableDatabase();
         Cursor cursor;
-
+        //////CHEB start
+//        if (text == "") {
+//        	cursor = getSherlockActivity().getContentResolver().query(
+//        			InfoContentProvider.CONTENT_URI, 
+//        			InfoTable.PROJECTION, 
+//        			InfoTable.COLUMN_CATEGORY + "='" + category + "'", 
+//        			null, 
+//        			InfoTable.COLUMN_NAME + " ASC");
+//        }else{
+//        	cursor = getSherlockActivity().getContentResolver().query(
+//        			InfoContentProvider.CONTENT_URI, 
+//        			InfoTable.PROJECTION, 
+//        			InfoTable.COLUMN_NAME + " LIKE '" + text + "%' AND " + InfoTable.COLUMN_CATEGORY + "='" + category + "'", 
+//        			null, 
+//        			InfoTable.COLUMN_NAME + " ASC");
+//        }
+        
+        //////CHEB finish
         if (text == "") {
             cursor = database.query(InfoTable.TABLE_ITEMS, null, InfoTable.COLUMN_CATEGORY + "='" + category + "'", null,null,null,null);
         } else {

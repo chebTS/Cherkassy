@@ -8,15 +8,14 @@
 
 
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp">
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/item_image"
-                android:background="@drawable/mc"
-            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/item_image"
+            android:background="@drawable/mc" />
 
         <TextView
                 android:layout_width="fill_parent"
@@ -27,8 +26,7 @@
                 android:textColor="#FFFFFF"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/item_title"
-                android:background="#80000000"
-                />
+                android:background="#80000000"/>
 
     </FrameLayout>
 

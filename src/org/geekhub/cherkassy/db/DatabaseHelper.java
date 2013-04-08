@@ -23,7 +23,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
         InfoTable.onUpgrade(sqLiteDatabase,i,i2);
     }
-
-
-
 }
