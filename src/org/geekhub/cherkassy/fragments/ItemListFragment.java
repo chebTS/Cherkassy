@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,7 +23,6 @@ import com.actionbarsherlock.view.MenuItem;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.ItemActivity;
 import org.geekhub.cherkassy.db.DatabaseHelper;
-import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
 import org.geekhub.cherkassy.helpers.ItemListAdapter;
 
@@ -103,13 +101,17 @@ public class ItemListFragment extends SherlockFragment {
 //        }
         
         //////CHEB finish
-        if (text == "") {
-            cursor = database.query(InfoTable.TABLE_ITEMS, null, InfoTable.COLUMN_CATEGORY + "='" + category + "'", null,null,null,null);
-        } else {
-            cursor = database.query(InfoTable.TABLE_ITEMS,null,
-                InfoTable.COLUMN_NAME + " LIKE '" + text + "%' AND " + InfoTable.COLUMN_CATEGORY + "='" + category + "'",
-                null,null,null,null);
-        }
+
+        Location curr = getCurrentLocation();
+            cursor = database.rawQuery("Select *," +
+                    " ((longitude-" + curr.getLongitude() + ")*(longitude-" + curr.getLongitude() + ")" +
+                    " +(latitude-" + curr.getLatitude() + ")*(latitude-" + curr.getLatitude() + ")) AS len " +
+                    " From items "+
+                    " WHERE " + InfoTable.COLUMN_NAME + " LIKE '%" + text + "%' AND " + InfoTable.COLUMN_CATEGORY + "='" + category + "' " +
+                    " ORDER BY len ASC ",null);
+
+
+
         getActivity().startManagingCursor(cursor);
 
         String[] from = new String[] {InfoTable.COLUMN_NAME };
@@ -142,21 +144,6 @@ public class ItemListFragment extends SherlockFragment {
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         String providerName = locationManager.getBestProvider(criteria, true);
 
-         locationManager.requestLocationUpdates(providerName, 100, 10, new LocationListener() {
-             @Override
-             public void onLocationChanged(Location location) {}
-
-             @Override
-             public void onStatusChanged(String s, int i, Bundle bundle) {}
-
-             @Override
-             public void onProviderEnabled(String s) {
-             }
-
-             @Override
-             public void onProviderDisabled(String s) {}
-
-         });
          Location loc = locationManager.getLastKnownLocation(providerName);
         return loc;
     }

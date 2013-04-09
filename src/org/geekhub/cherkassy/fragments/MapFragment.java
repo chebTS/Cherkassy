@@ -25,27 +25,27 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends SherlockFragment  implements LocationListener{
-	private MapView mMapView;
+    private MapView mMapView;
     private GoogleMap mMap;
     private Bundle mBundle;
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
-	private  MapActivity mapActivity;
+    private  MapActivity mapActivity;
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		mapActivity = (MapActivity)getSherlockActivity();
-		mMap.setMyLocationEnabled(true);	        
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mapActivity = (MapActivity)getSherlockActivity();
+        mMap.setMyLocationEnabled(true);
         mMap.setOnMapClickListener(new OnMapClickListener() {
-			@Override
-			public void onMapClick(LatLng latlng) {
-				mMap.clear();
-				mMap.addMarker(new MarkerOptions().position(latlng).snippet("Location"));
-				mapActivity.setIssuePosition(latlng);
-			}
-		});        
+            @Override
+            public void onMapClick(LatLng latlng) {
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(latlng).snippet("Location"));
+                mapActivity.setIssuePosition(latlng);
+            }
+        });
         try {
             MapsInitializer.initialize(getSherlockActivity());
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -55,40 +55,40 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
         locationManager = (LocationManager) getSherlockActivity().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER        
 
-	}
+    }
 
-	@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.map_frag, container,false);
-		if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(getSherlockActivity()) == 0){				
-			mMapView = (MapView) v.findViewById(R.id.map);
-	        mMapView.onCreate(mBundle);
-	        mMap = ((MapView) v.findViewById(R.id.map)).getMap();
-		}
+        View v = inflater.inflate(R.layout.map_frag, container,false);
+        if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(getSherlockActivity()) == 0){
+            mMapView = (MapView) v.findViewById(R.id.map);
+            mMapView.onCreate(mBundle);
+            mMap = ((MapView) v.findViewById(R.id.map)).getMap();
+        }
         return v;
     }
 
-	@Override
-	public void onLocationChanged(Location location) {
-		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-	    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
-	    mMap.animateCamera(cameraUpdate);
-	    locationManager.removeUpdates(this);		
-	}
+    @Override
+    public void onLocationChanged(Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        mMap.animateCamera(cameraUpdate);
+        locationManager.removeUpdates(this);
+    }
 
-	@Override
-	public void onProviderDisabled(String provider) {
-	}
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
 
-	@Override
-	public void onProviderEnabled(String provider) {
-	}
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
 
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-	}
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
 
-	@Override
+    @Override
     public void onResume() {
         super.onResume();
         mMapView.onResume();
@@ -104,5 +104,5 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     public void onDestroy() {
         mMapView.onDestroy();
         super.onDestroy();
-    }	
+    }
 }
