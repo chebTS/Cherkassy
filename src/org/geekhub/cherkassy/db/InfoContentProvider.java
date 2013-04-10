@@ -54,7 +54,7 @@ public class InfoContentProvider extends ContentProvider {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
         // Check if the caller has requested a column which does not exists
-        checkColumns(projection);
+        //checkColumns(projection);
 
         // Set the table
         queryBuilder.setTables(InfoTable.TABLE_ITEMS);
