@@ -1,7 +1,6 @@
 package org.geekhub.cherkassy.db;
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -22,6 +21,8 @@ public class InfoContentProvider extends ContentProvider {
     // Used for the UriMacher
     private static final int INFO = 1;
     private static final int INFO_ID = 2;
+    private static final int IMAGE = 3;
+    private static final int IMAGE_ID = 4;
 
     private static final String AUTHORITY = "org.geekhub.cherkassy.db";
 
@@ -29,15 +30,17 @@ public class InfoContentProvider extends ContentProvider {
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
             + "/" + BASE_PATH);
 
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
-            + "/infos";
-    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
-            + "/info";
+    private static final String IMG_PATH = "IMAGES";
+    public static final Uri IMG_URI = Uri.parse("content://" + AUTHORITY
+            + "/" + IMG_PATH);
+
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
         sURIMatcher.addURI(AUTHORITY, BASE_PATH, INFO);
         sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", INFO_ID);
+        sURIMatcher.addURI(AUTHORITY, IMG_PATH, IMAGE);
+        sURIMatcher.addURI(AUTHORITY, IMG_PATH, IMAGE_ID);
     }
 
     @Override
@@ -56,18 +59,30 @@ public class InfoContentProvider extends ContentProvider {
         // Check if the caller has requested a column which does not exists
         //checkColumns(projection);
 
-        // Set the table
-        queryBuilder.setTables(InfoTable.TABLE_ITEMS);
+
 
         int uriType = sURIMatcher.match(uri);
         switch (uriType) {
             case INFO:
+                queryBuilder.setTables(InfoTable.TABLE_ITEMS);
                 break;
             case INFO_ID:
+                queryBuilder.setTables(InfoTable.TABLE_ITEMS);
                 // Adding the ID to the original query
                 queryBuilder.appendWhere(InfoTable.COLUMN_ID + "="
                         + uri.getLastPathSegment());
                 break;
+
+            case IMAGE:
+                queryBuilder.setTables(ImageTable.TABLE_IMAGES);
+                break;
+            case IMAGE_ID:
+                queryBuilder.setTables(ImageTable.TABLE_IMAGES);
+                // Adding the ID to the original query
+                queryBuilder.appendWhere(ImageTable.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
+                break;
+
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -89,18 +104,22 @@ public class InfoContentProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         int uriType = sURIMatcher.match(uri);
+        Uri resURI = null;
         SQLiteDatabase sqlDB = database.getWritableDatabase();
         int rowsDeleted = 0;
         long id = 0;
         switch (uriType) {
             case INFO:
                 id = sqlDB.insert(InfoTable.TABLE_ITEMS, null, values);
-                break;
+                getContext().getContentResolver().notifyChange(uri, null);
+                return Uri.parse(BASE_PATH + "/" + id);
+            case IMAGE:
+                id = sqlDB.insert(ImageTable.TABLE_IMAGES, null, values);
+                getContext().getContentResolver().notifyChange(uri, null);
+                return Uri.parse(IMG_PATH + "/" + id);
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return Uri.parse(BASE_PATH + "/" + id);
     }
 
     @Override

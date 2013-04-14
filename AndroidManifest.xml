@@ -32,9 +32,11 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock" >
 
+        <!--  It`s my API_KEY.
+              Your - AIzaSyB3uuQZ5g8GWFVRdgWpjmQ6YD12tZSWBR0 -->
         <meta-data
 		    android:name="com.google.android.maps.v2.API_KEY"
-		    android:value="AIzaSyB3uuQZ5g8GWFVRdgWpjmQ6YD12tZSWBR0"/>
+		    android:value="AIzaSyCsAftPCY_ZcMcXHqksV4vu8_DvZ7sk5o0"/>
 
         <activity
             android:screenOrientation="portrait"
