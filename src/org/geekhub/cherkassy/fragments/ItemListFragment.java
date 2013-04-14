@@ -22,7 +22,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.ItemActivity;
-import org.geekhub.cherkassy.db.DatabaseHelper;
 import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
 import org.geekhub.cherkassy.helpers.ItemListAdapter;
@@ -81,24 +80,9 @@ public class ItemListFragment extends SherlockFragment {
 
     
     public void getListFromDB(String text) {
-        DatabaseHelper dbHelper = new DatabaseHelper(getActivity());
-        database = dbHelper.getReadableDatabase();
         Cursor cursor;
-
-
-
         Location curr = getCurrentLocation();
-       /* String[] proj = {                InfoTable.COLUMN_ID,
-                InfoTable.COLUMN_NAME,
-                InfoTable.COLUMN_ADDRESS,
-                InfoTable.COLUMN_LOGOURL,
-                InfoTable.COLUMN_PHONE,
-                InfoTable.COLUMN_EMAIL,
-                InfoTable.COLUMN_WEBSITEURL,
-                InfoTable.COLUMN_LATITUDE,
-                InfoTable.COLUMN_LONGITUDE,
-                InfoTable.COLUMN_CATEGORY,
-                 };   */
+
         String[] proj = InfoTable.PROJECTION;
         proj[2] = " ((longitude-" + curr.getLongitude() + ")*(longitude-" + curr.getLongitude() + ")" +
                 " +(latitude-" + curr.getLatitude() + ")*(latitude-" + curr.getLatitude() + ")) AS len ";
@@ -109,20 +93,7 @@ public class ItemListFragment extends SherlockFragment {
                     InfoTable.COLUMN_NAME + " LIKE '%" + text + "%' AND " + InfoTable.COLUMN_CATEGORY + "='" + category + "' ",
         			null,
         			"len ASC");
-            cursor.isLast();
-        
-        //////CHEB finish
 
-      /*
-            cursor = database.rawQuery("Select *," +
-                    " ((longitude-" + curr.getLongitude() + ")*(longitude-" + curr.getLongitude() + ")" +
-                    " +(latitude-" + curr.getLatitude() + ")*(latitude-" + curr.getLatitude() + ")) AS len " +
-                    " From items "+
-                    " WHERE " + InfoTable.COLUMN_NAME + " LIKE '%" + text + "%' AND " + InfoTable.COLUMN_CATEGORY + "='" + category + "' " +
-                    " ORDER BY len ASC ",null);
-
-
-       */
         getActivity().startManagingCursor(cursor);
 
         String[] from = new String[] {InfoTable.COLUMN_NAME };
