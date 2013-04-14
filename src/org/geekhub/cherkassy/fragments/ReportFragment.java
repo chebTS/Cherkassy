@@ -67,6 +67,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
         return v;
     }
 	
+	//http://stackoverflow.com/questions/2020088/sending-email-in-android-using-javamail-api-without-using-the-default-built-in-a/2033124#2033124
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
