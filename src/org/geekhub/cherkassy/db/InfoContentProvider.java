@@ -40,7 +40,7 @@ public class InfoContentProvider extends ContentProvider {
         sURIMatcher.addURI(AUTHORITY, BASE_PATH, INFO);
         sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", INFO_ID);
         sURIMatcher.addURI(AUTHORITY, IMG_PATH, IMAGE);
-        sURIMatcher.addURI(AUTHORITY, IMG_PATH, IMAGE_ID);
+        sURIMatcher.addURI(AUTHORITY, IMG_PATH + "/#", IMAGE_ID);
     }
 
     @Override
@@ -113,6 +113,7 @@ public class InfoContentProvider extends ContentProvider {
                 id = sqlDB.insert(InfoTable.TABLE_ITEMS, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return Uri.parse(BASE_PATH + "/" + id);
+
             case IMAGE:
                 id = sqlDB.insert(ImageTable.TABLE_IMAGES, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);

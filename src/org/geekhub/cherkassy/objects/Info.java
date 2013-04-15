@@ -2,6 +2,7 @@ package org.geekhub.cherkassy.objects;
 
 import android.content.Context;
 import org.geekhub.cherkassy.db.InfoTable;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,14 +21,19 @@ public class Info {
         setName(data.getString("name"));
         setAddress(data.getString("Address"));
         setLogoURL(data.getString("logo"));
-        setPhone("null");
+        setPhone(data.getString("phone"));
         setEmail(data.getString("email"));
         setWebsiteURL(data.getString("websiteURL"));
         setLatitude(data.getLong("latitude"));
         setLongitude(data.getLong("longitude"));
         setCategory(category);
 
-        InfoTable.saveArticleToDB(context,this);
+        int id = InfoTable.saveArticleToDB(context,this);
+
+        JSONArray JSONitem = data.getJSONArray("images");
+        for (int i = 1; i < JSONitem.length(); i++) {
+            new ImagesObj(JSONitem.getJSONObject(i),context,id);
+        }
     }
 
     public String getName() {

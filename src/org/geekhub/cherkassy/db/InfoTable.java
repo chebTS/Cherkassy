@@ -3,6 +3,7 @@ package org.geekhub.cherkassy.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import org.geekhub.cherkassy.objects.Info;
 
 public class InfoTable {
@@ -56,7 +57,7 @@ public class InfoTable {
             onCreate(db);
         }
 
-    public static void saveArticleToDB(Context context, Info info)
+    public static int saveArticleToDB(Context context, Info info)
     {
         ContentValues cv = new ContentValues();
 
@@ -70,10 +71,9 @@ public class InfoTable {
         cv.put(COLUMN_LOGOURL,info.getLogoURL());
         cv.put(COLUMN_EMAIL,info.getEmail());
 
-
-
-        context.getContentResolver().insert(InfoContentProvider.CONTENT_URI, cv);
-
+        Uri uri = context.getContentResolver().insert(InfoContentProvider.CONTENT_URI, cv);
+        String id = uri.getLastPathSegment();
+        return Integer.valueOf(id);
     }
 
     }

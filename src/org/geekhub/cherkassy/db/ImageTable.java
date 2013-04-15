@@ -3,7 +3,8 @@ package org.geekhub.cherkassy.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import org.geekhub.cherkassy.objects.Info;
+import android.net.Uri;
+import org.geekhub.cherkassy.objects.ImagesObj;
 
 public class ImageTable {
 
@@ -36,12 +37,15 @@ public class ImageTable {
         onCreate(db);
     }
 
-    public static void saveToDB(Context context, Info info)
+    public static void saveToDB(Context context, ImagesObj image)
     {
         ContentValues cv = new ContentValues();
+        cv.put(COLUMN_URL,image.getImageURL());
+        cv.put(COLUMN_ITEMID,image.getInfoID());
+        context.getContentResolver().insert(InfoContentProvider.IMG_URI, cv);
 
-        context.getContentResolver().insert(InfoContentProvider.CONTENT_URI, cv);
-
+        Uri uri = context.getContentResolver().insert(InfoContentProvider.IMG_URI, cv);
+        String id = uri.getLastPathSegment();
     }
 
 }
