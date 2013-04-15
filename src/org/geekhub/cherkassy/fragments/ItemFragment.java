@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import org.geekhub.cherkassy.R;
@@ -48,14 +50,16 @@ public class ItemFragment extends SherlockFragment {
             MarkerOptions mo = new MarkerOptions()
                     .position(new LatLng(
                             cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LATITUDE)),
-                            cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LOGOURL))))
+                            cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LONGITUDE))))
                     .title(cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME)))
                     .snippet(cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_ADDRESS)));
             mMap.addMarker(mo);
-//	        Polyline line =mMap.addPolyline(new PolylineOptions().add(
-//	        			new LatLng(56.05, 42.042),
-//	        			new LatLng(50.00, 45.02))
-//	        			.geodesic(true));
+
+            try {
+                MapsInitializer.initialize(getSherlockActivity());
+            } catch (GooglePlayServicesNotAvailableException e) {
+                e.printStackTrace();
+            }
         }
 
         return inflate;
@@ -79,18 +83,18 @@ public class ItemFragment extends SherlockFragment {
     @Override
     public void onResume() {
         super.onResume();
-        //mMapView.onResume();
+        mMapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //mMapView.onPause();
+        mMapView.onPause();
     }
 
     @Override
     public void onDestroy() {
-       // mMapView.onDestroy();
+        mMapView.onDestroy();
         super.onDestroy();
     }
 

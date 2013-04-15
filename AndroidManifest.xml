@@ -34,9 +34,12 @@
 
         <!--  It`s my API_KEY.
               Your - AIzaSyB3uuQZ5g8GWFVRdgWpjmQ6YD12tZSWBR0 -->
+        <!-- 
+        	Bogdan`s key AIzaSyCsAftPCY_ZcMcXHqksV4vu8_DvZ7sk5o0
+        	 -->
         <meta-data
 		    android:name="com.google.android.maps.v2.API_KEY"
-		    android:value="AIzaSyCsAftPCY_ZcMcXHqksV4vu8_DvZ7sk5o0"/>
+		    android:value="AIzaSyB3uuQZ5g8GWFVRdgWpjmQ6YD12tZSWBR0"/>
 
         <activity
             android:screenOrientation="portrait"
