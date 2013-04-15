@@ -5,12 +5,12 @@ import java.io.InputStream;
 
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.MapActivity;
+import org.geekhub.cherkassy.email.MailSenderClass;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -72,6 +72,28 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
         return v;
     }
 	
+	private void sendReport(){        
+    	new Thread(new Runnable() {				
+			@Override
+			public void run() {
+				String from, where, title, text, attach;
+				from = "chebTS@gmail.com";
+				where = "chebTS@gmail.com";		
+				title = "Cherkassy report";
+				text = "On location " + txtLatLng.getText().toString()+
+						"\nThere is an issue \n"
+						+ edtDescription.getText().toString();
+				attach = "";
+				try {
+					MailSenderClass sender = new MailSenderClass("CkGuideGeek@gmail.com", "CK2Android");
+					sender.sendMail(title, text, from, where, attach);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}					
+			}
+		}).start();
+	}
+	
 	//http://stackoverflow.com/questions/2020088/sending-email-in-android-using-javamail-api-without-using-the-default-built-in-a/2033124#2033124
 	@Override
 	public void onClick(View v) {
@@ -80,17 +102,17 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 			if ((lat==null)||(lng==null)){
 				Toast.makeText(getSherlockActivity(), "Please set issue location", Toast.LENGTH_LONG).show();
 			}else{
-				String aEmailList[] = { "chebTS@gmail.com" }; 
-				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); //This is the email intent
-				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList); // adds the address to the intent
-				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Cherkassy issue");//the subject				 
-				emailIntent.setType("plain/text");				 
-				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "On location " + txtLatLng.getText().toString()+
-						"\nThere is an issue \n"
-						+ edtDescription.getText().toString()
-						); 
-				//TODO add picture
-				startActivity(emailIntent);
+				sendReport();
+//				String aEmailList[] = { "chebTS@gmail.com" }; 
+//				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); //This is the email intent
+//				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList); // adds the address to the intent
+//				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Cherkassy issue");//the subject				 
+//				emailIntent.setType("plain/text");				 
+//				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "On location " + txtLatLng.getText().toString()+
+//						"\nThere is an issue \n"
+//						+ edtDescription.getText().toString()
+//						); 
+//				startActivity(emailIntent);
 				//TODO reset text, imageview and coordinates;
 			}
 			break;
@@ -123,15 +145,15 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.gallery:
-				openGallery();
+//			case R.id.gallery:
+//				openGallery();
 //				Log.i("Opt","Gallery");
 //				Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 //				photoPickerIntent.setType("image/*");
 //				startActivityForResult(photoPickerIntent, SELECT_GALERY);  
-				break;
-			case R.id.camera:
-				openCamera();
+//				break;
+//			case R.id.camera:
+//				openCamera();
 //				Log.i("Opt","Camera");
 //				Log.d("ANDRO_CAMERA", "Starting camera on the phone...");
 //		        String fileName = "testphoto.jpg";
@@ -145,7 +167,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 //		        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 //		        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
 //		        startActivityForResult(intent, SELECT_CAMERA);
-				break;
+//				break;
 			case R.id.map:
 				startActivityForResult(new Intent(getSherlockActivity(), MapActivity.class), SELECT_MAP);
 				break;
