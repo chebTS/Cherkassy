@@ -17,10 +17,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
       InfoTable.onCreate(sqLiteDatabase);
+      ImageTable.onCreate(sqLiteDatabase);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
         InfoTable.onUpgrade(sqLiteDatabase,i,i2);
+        ImageTable.onUpgrade(sqLiteDatabase,i,i2);
     }
 }

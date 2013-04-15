@@ -2,6 +2,7 @@ package org.geekhub.cherkassy.fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
+import org.geekhub.cherkassy.helpers.ItemPageAdapter;
 
 public class ItemFragment extends SherlockFragment {
 	private MapView mMapView;
@@ -41,6 +43,11 @@ public class ItemFragment extends SherlockFragment {
         String category =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME));
         TextView tw = (TextView) inflate.findViewById(R.id.item_title);
         tw.setText(category);
+
+        ItemPageAdapter adapter = new ItemPageAdapter();
+        ViewPager myPager = (ViewPager) inflate.findViewById(R.id.itemviewpager);
+        myPager.setAdapter(adapter);
+        myPager.setCurrentItem(2);
 
         if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity()) == 0){
             mMapView = (MapView) inflate.findViewById(R.id.map);

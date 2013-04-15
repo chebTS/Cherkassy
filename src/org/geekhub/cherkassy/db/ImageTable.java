@@ -25,7 +25,8 @@ public class ImageTable {
             + TABLE_IMAGES + " ("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_URL + " TEXT NOT NULL ,"
-            + " FOREIGN KEY ("+COLUMN_ITEMID+") REFERENCES "+InfoTable.TABLE_ITEMS+" ("+InfoTable.COLUMN_ID+"), " + ")";
+            + COLUMN_ITEMID + " INTEGER NOT NULL ,"
+            + " FOREIGN KEY ("+COLUMN_ITEMID+") REFERENCES "+InfoTable.TABLE_ITEMS+" ("+InfoTable.COLUMN_ID+") " + ")";
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("PRAGMA foreign_keys=ON;");

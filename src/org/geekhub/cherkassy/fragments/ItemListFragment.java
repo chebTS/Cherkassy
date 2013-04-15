@@ -45,11 +45,6 @@ public class ItemListFragment extends SherlockFragment {
         setHasOptionsMenu(true);
         category = getActivity().getIntent().getStringExtra("category");
         getListFromDB("");
-        /*search_text = (EditText) getView().findViewById(R.id.collapsibleEditText);
-
- */
-
-
     }
 
     @Override
