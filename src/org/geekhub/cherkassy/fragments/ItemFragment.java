@@ -1,11 +1,17 @@
 package org.geekhub.cherkassy.fragments;
 
+import org.geekhub.cherkassy.R;
+import org.geekhub.cherkassy.db.InfoContentProvider;
+import org.geekhub.cherkassy.db.InfoTable;
+
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -14,9 +20,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import org.geekhub.cherkassy.R;
-import org.geekhub.cherkassy.db.InfoContentProvider;
-import org.geekhub.cherkassy.db.InfoTable;
 
 public class ItemFragment extends SherlockFragment {
 	private MapView mMapView;
@@ -47,6 +50,9 @@ public class ItemFragment extends SherlockFragment {
             mMapView.onCreate(mBundle);
             mMap = mMapView.getMap();
             mMap.setMyLocationEnabled(true);
+            Log.i("Points",Double.toString(cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LATITUDE))));
+            Log.i("Points",Double.toString(cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LONGITUDE))));
+            
             MarkerOptions mo = new MarkerOptions()
                     .position(new LatLng(
                             cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LATITUDE)),

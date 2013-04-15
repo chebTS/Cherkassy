@@ -51,7 +51,7 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
         } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
-        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(49.432259, 32.074257) , 10.0f) );
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(49.432259, 32.074257) , 13.0f) );
         locationManager = (LocationManager) getSherlockActivity().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER        
 
@@ -71,7 +71,7 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
     @Override
     public void onLocationChanged(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
         mMap.animateCamera(cameraUpdate);
         locationManager.removeUpdates(this);
     }
