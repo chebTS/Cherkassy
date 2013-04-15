@@ -9,6 +9,7 @@
     <string name="report">"Report an issue"</string>
     <string name="send">"Send"</string>
     <string name="item">"Item"</string>
+    <string name="report_sended">"Your report has been sended"</string>    
+	<string name="no_internet">"There is no internet connection"</string>
     
-
 </resources>

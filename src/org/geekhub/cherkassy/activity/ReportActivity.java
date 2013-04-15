@@ -19,12 +19,12 @@ public class ReportActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.report_act);
 		
-		if (savedInstanceState == null) {
+		//if (savedInstanceState == null) {
             getSupportFragmentManager()
             		.beginTransaction()
             		.add(R.id.report_frag, new ReportFragment())
             		.commit();
-        }
+        //}
 	}
 	
 	@Override
@@ -44,5 +44,7 @@ public class ReportActivity extends SherlockFragmentActivity {
 	    }
 	return ret;
 	}
+	
+	
 	
 }

@@ -45,8 +45,4 @@ public class CategoryListActivity extends SherlockFragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	
-
-
 }

@@ -1,9 +1,7 @@
 package org.geekhub.cherkassy.fragments;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URI;
 
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.MapActivity;
@@ -18,6 +16,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -91,7 +91,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 //	startActivity(emailIntent);
 	//http://stackoverflow.com/questions/2020088/sending-email-in-android-using-javamail-api-without-using-the-default-built-in-a/2033124#2033124
 	
-	//TODO reset text, imageview and coordinates;
+
 	private void sendReport(){        
     	new Thread(new Runnable() {				
 			@Override
@@ -113,6 +113,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 				}					
 			}
 		}).start();
+    	Toast.makeText(getSherlockActivity(), getResources().getString(R.string.report_sended), Toast.LENGTH_LONG).show();
     	getSherlockActivity().finish();
 	}
 	
@@ -125,7 +126,11 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 			if ((lat==null)||(lng==null)){
 				Toast.makeText(getSherlockActivity(), "Please set issue location", Toast.LENGTH_LONG).show();
 			}else{
-				sendReport();
+				if (isConnectingToInternet(getSherlockActivity())){
+					sendReport();
+				}else{
+					Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+				}
 			}
 			break;
 		case R.id.imgPhoto:
@@ -160,6 +165,20 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		
 	}
 	
+	public static boolean isConnectingToInternet(Activity activity){
+        ConnectivityManager connectivity = (ConnectivityManager) activity.getSystemService(activity.CONNECTIVITY_SERVICE);
+          if (connectivity != null){
+              NetworkInfo[] info = connectivity.getAllNetworkInfo();
+              if (info != null){
+                  for (int i = 0; i < info.length; i++){
+                      if (info[i].getState() == NetworkInfo.State.CONNECTED){
+                          return true;
+                      }
+                  }
+              }
+          }
+          return false;
+    }
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -199,6 +218,25 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		inflater.inflate(R.menu.report_menu,menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
+	
+	
+	
+//	@Override
+//	public void onDestroy() {
+//		Log.i("Log","onDestroy");
+//		super.onDestroy();
+//	}
+
+//	@Override
+//	public void onDestroyView() {
+//		super.onDestroyView();
+//		if (((BitmapDrawable)imgPhoto.getDrawable())!= null){
+//			(((BitmapDrawable)imgPhoto.getDrawable()).getBitmap()).recycle();			
+//		}
+//		//Log.i("Log","onDestroyView");
+//	}
+
+	
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -276,6 +314,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
             return true;
 		}catch (FileNotFoundException e) {
 			Log.i("FileNotFound","FileNotFound");
+			e.printStackTrace();
 			return false;
 		}
 	}
