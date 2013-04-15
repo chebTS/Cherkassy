@@ -1,7 +1,9 @@
 package org.geekhub.cherkassy.fragments;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URI;
 
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.MapActivity;
@@ -12,6 +14,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -47,11 +50,13 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	Uri imageUri;
 	Double lat, lng;
 	AlertDialog.Builder ad;
+	String attachFilePath;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		attachFilePath = "";
 	}
 
 	@Override
@@ -68,10 +73,25 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		imgPhoto = (ImageView)v.findViewById(R.id.imgPhoto);
 		btnSend  = (Button)v.findViewById(R.id.btnSend);
 		txtLatLng = (TextView)v.findViewById(R.id.txtLatLng);
+		txtLatLng.setOnClickListener(this);
 		edtDescription = (EditText)v.findViewById(R.id.edtDescription);
         return v;
     }
 	
+	
+//	String aEmailList[] = { "chebTS@gmail.com" }; 
+//	Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); //This is the email intent
+//	emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList); // adds the address to the intent
+//	emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Cherkassy issue");//the subject				 
+//	emailIntent.setType("plain/text");				 
+//	emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "On location " + txtLatLng.getText().toString()+
+//			"\nThere is an issue \n"
+//			+ edtDescription.getText().toString()
+//			); 
+//	startActivity(emailIntent);
+	//http://stackoverflow.com/questions/2020088/sending-email-in-android-using-javamail-api-without-using-the-default-built-in-a/2033124#2033124
+	
+	//TODO reset text, imageview and coordinates;
 	private void sendReport(){        
     	new Thread(new Runnable() {				
 			@Override
@@ -83,18 +103,21 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 				text = "On location " + txtLatLng.getText().toString()+
 						"\nThere is an issue \n"
 						+ edtDescription.getText().toString();
-				attach = "";
+				attach = attachFilePath;
 				try {
 					MailSenderClass sender = new MailSenderClass("CkGuideGeek@gmail.com", "CK2Android");
 					sender.sendMail(title, text, from, where, attach);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}					
 			}
 		}).start();
+    	getSherlockActivity().finish();
 	}
 	
-	//http://stackoverflow.com/questions/2020088/sending-email-in-android-using-javamail-api-without-using-the-default-built-in-a/2033124#2033124
+	
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -103,71 +126,44 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 				Toast.makeText(getSherlockActivity(), "Please set issue location", Toast.LENGTH_LONG).show();
 			}else{
 				sendReport();
-//				String aEmailList[] = { "chebTS@gmail.com" }; 
-//				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); //This is the email intent
-//				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList); // adds the address to the intent
-//				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Cherkassy issue");//the subject				 
-//				emailIntent.setType("plain/text");				 
-//				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "On location " + txtLatLng.getText().toString()+
-//						"\nThere is an issue \n"
-//						+ edtDescription.getText().toString()
-//						); 
-//				startActivity(emailIntent);
-				//TODO reset text, imageview and coordinates;
 			}
 			break;
 		case R.id.imgPhoto:
-			ad = new AlertDialog.Builder(getSherlockActivity());
-			ad.setTitle("Choose source");  // заголовок
-			ad.setMessage("Camera or gallery"); // сообщение
-			ad.setCancelable(true);
-			ad.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					openCamera();
-				}
-			});
-			ad.setNeutralButton("Gallery", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					openGallery();
-				}
-			});
-			ad.show();
+			showPhotoDialog();
 			break;
+		case R.id.txtLatLng:
+			startActivityForResult(new Intent(getSherlockActivity(), MapActivity.class), SELECT_MAP);
+			break;						
 		default:
 			break;
 		}
 	}	
 	
+	private void showPhotoDialog(){
+		ad = new AlertDialog.Builder(getSherlockActivity());
+		ad.setTitle("Choose source");  // заголовок
+		ad.setMessage("Camera or gallery"); // сообщение
+		ad.setCancelable(true);
+		ad.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				openCamera();
+			}
+		});
+		ad.setNeutralButton("Gallery", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				openGallery();
+			}
+		});
+		ad.show();
+		
+	}
 	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-//			case R.id.gallery:
-//				openGallery();
-//				Log.i("Opt","Gallery");
-//				Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-//				photoPickerIntent.setType("image/*");
-//				startActivityForResult(photoPickerIntent, SELECT_GALERY);  
-//				break;
-//			case R.id.camera:
-//				openCamera();
-//				Log.i("Opt","Camera");
-//				Log.d("ANDRO_CAMERA", "Starting camera on the phone...");
-//		        String fileName = "testphoto.jpg";
-//		        ContentValues values = new ContentValues();
-//		        values.put(MediaStore.Images.Media.TITLE, fileName);
-//		        values.put(MediaStore.Images.Media.DESCRIPTION,
-//		                "Image capture by camera");
-//		        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-//		        imageUri = actReport.getContentResolver().insert( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-//		        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//		        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-//		        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-//		        startActivityForResult(intent, SELECT_CAMERA);
-//				break;
 			case R.id.map:
 				startActivityForResult(new Intent(getSherlockActivity(), MapActivity.class), SELECT_MAP);
 				break;
@@ -232,7 +228,23 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	    }		
 	}
 	
+	private String getRealPathFromURI(Uri contentUri) {
+        // can post image
+        String [] proj={MediaStore.Images.Media.DATA};
+        Cursor cursor = getSherlockActivity().managedQuery( contentUri,
+                        proj, // Which columns to return
+                        null,       // WHERE clause; which rows to return (all rows)
+                        null,       // WHERE clause selection arguments (none)
+                        null); // Order-by clause (ascending by name)
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+	}
+	
 	private Boolean setImage(Uri uri){
+		Log.i("Image URI", uri.toString());
+		attachFilePath = getRealPathFromURI(uri);
+		//Log.i("Image File path", getRealPathFromURI(uri));
 		try{
 			if (((BitmapDrawable)imgPhoto.getDrawable())!= null)
 					(((BitmapDrawable)imgPhoto.getDrawable()).getBitmap()).recycle();

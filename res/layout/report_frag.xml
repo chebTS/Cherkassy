@@ -15,6 +15,7 @@
 	    <TextView
 	        android:id="@+id/txtLatLng"
 	        android:textSize="18sp"
+	        android:hint="Issue coordinates"
 	        android:layout_height="wrap_content"
 	        android:layout_width="match_parent"
 	        android:layout_marginTop="5dp"
