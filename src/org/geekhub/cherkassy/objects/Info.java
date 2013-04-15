@@ -13,8 +13,8 @@ public class Info {
     private String phone;
     private String email;
     private String websiteURL;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private String category;
 
     public Info(JSONObject data,String category,Context context) throws JSONException {
@@ -24,8 +24,8 @@ public class Info {
         setPhone(data.getString("phone"));
         setEmail(data.getString("email"));
         setWebsiteURL(data.getString("websiteURL"));
-        setLatitude(data.getLong("latitude"));
-        setLongitude(data.getLong("longitude"));
+        setLatitude(data.getDouble("latitude"));
+        setLongitude(data.getDouble("longitude"));
         setCategory(category);
 
         int id = InfoTable.saveArticleToDB(context,this);
@@ -84,19 +84,19 @@ public class Info {
         this.websiteURL = websiteURL;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

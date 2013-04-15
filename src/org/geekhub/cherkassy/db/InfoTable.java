@@ -45,7 +45,7 @@ public class InfoTable {
                 + COLUMN_EMAIL + " TEXT NOT NULL, "
                 + COLUMN_WEBSITEURL + " TEXT NOT NULL, "
                 + COLUMN_LATITUDE + " REAL, "
-                + COLUMN_LONGITUDE + " TEXT NOT NULL, "
+                + COLUMN_LONGITUDE + " REAL, "
                 + COLUMN_CATEGORY + " TEXT NOT NULL " + ")";
 
         public static void onCreate(SQLiteDatabase db) {
