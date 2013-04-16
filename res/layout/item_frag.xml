@@ -31,9 +31,9 @@
     </FrameLayout>
 	<TextView 
 	    android:id="@+id/txtDescription"
-	    android:textSize="18sp"	 
+	    android:textSize="14sp"
+        android:fontFamily="sans-serif-light"
 	    android:textColor="@android:color/black"
-	    android:text=" bla  bla"   
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"/>
 	

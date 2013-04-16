@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public class Info {
     private String name;
     private String address;
+    private String description;
     private String logoURL;
     private String phone;
     private String email;
@@ -21,6 +22,7 @@ public class Info {
         setName(data.getString("name"));
         setAddress(data.getString("Address"));
         setLogoURL(data.getString("logo"));
+        setDescription(data.getString("description"));
         JSONArray JSONitem = data.getJSONArray("images");
         setPhone(data.getString("phone"));
         setEmail(data.getString("email"));
@@ -106,5 +108,13 @@ public class Info {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

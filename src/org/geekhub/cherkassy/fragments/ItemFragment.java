@@ -44,11 +44,18 @@ public class ItemFragment extends SherlockFragment {
                 InfoTable.COLUMN_ID + "=" + item_id ,
                 null,
                 null);
+
         cursor1.moveToFirst();
         String category =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME));
+        String description =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_DESCRIPTION));
+
         getSherlockActivity().setTitle(category);
+
         TextView tw = (TextView) inflate.findViewById(R.id.item_title);
+        TextView textView = (TextView) inflate.findViewById(R.id.txtDescription);
+
         tw.setText(category);
+        textView.setText(description);
 
         ImagePager(item_id,inflater,inflate);
 
@@ -89,6 +96,7 @@ public class ItemFragment extends SherlockFragment {
 
         cursor.moveToFirst();
         List<String> urlList = new ArrayList<String>();
+
         for (int i=1;i<=cursor.getCount();i++) {
             String imgLink = cursor.getString(cursor.getColumnIndex(ImageTable.COLUMN_URL));
             urlList.add(imgLink);

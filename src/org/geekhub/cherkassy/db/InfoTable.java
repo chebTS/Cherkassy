@@ -13,6 +13,7 @@ public class InfoTable {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_ADDRESS = "address";
+        public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_LOGOURL = "logourl";
         public static final String COLUMN_PHONE = "phone";
         public static final String COLUMN_EMAIL = "email";
@@ -25,6 +26,7 @@ public class InfoTable {
                 COLUMN_ID,
                 COLUMN_NAME,
                 COLUMN_ADDRESS,
+                COLUMN_DESCRIPTION,
                 COLUMN_LOGOURL,
                 COLUMN_PHONE,
                 COLUMN_EMAIL,
@@ -40,6 +42,7 @@ public class InfoTable {
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NAME + " TEXT NOT NULL, "
                 + COLUMN_ADDRESS + " TEXT NOT NULL, "
+                + COLUMN_DESCRIPTION + " TEXT NOT NULL, "
                 + COLUMN_LOGOURL + " TEXT NOT NULL, "
                 + COLUMN_PHONE + " TEXT NOT NULL, "
                 + COLUMN_EMAIL + " TEXT NOT NULL, "
@@ -63,6 +66,7 @@ public class InfoTable {
 
         cv.put(COLUMN_CATEGORY,info.getCategory());
         cv.put(COLUMN_PHONE,info.getPhone());
+        cv.put(COLUMN_DESCRIPTION,info.getDescription());
         cv.put(COLUMN_LONGITUDE,info.getLongitude());
         cv.put(COLUMN_WEBSITEURL,info.getWebsiteURL());
         cv.put(COLUMN_LATITUDE,info.getLatitude());
