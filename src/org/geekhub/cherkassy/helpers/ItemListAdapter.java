@@ -42,6 +42,7 @@ public class ItemListAdapter extends SimpleCursorAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.item_adapter, null);
         }
+
         this.c.moveToPosition(pos);
         String name = this.c.getString(this.c.getColumnIndex(InfoTable.COLUMN_NAME));
         double lati = this.c.getDouble(this.c.getColumnIndex(InfoTable.COLUMN_LATITUDE));
@@ -91,10 +92,23 @@ public class ItemListAdapter extends SimpleCursorAdapter {
         double distance = currLocation.distanceTo(locationB);
 
         TextView tvdistance = (TextView) v.findViewById(R.id.distance_item);
-        tvdistance.setText(Double.toString(distance) + "meters");
+        tvdistance.setText(getDistance(distance));
 
         return(v);
     }
+
+    private String getDistance(Double distance) {
+        String str;
+
+        if (distance < 1000) {
+           str = Double.toString(distance) + " meters";
+        } else {
+           str = "~" +  Double.toString(Math.round(distance/1000)) + "km";
+        }
+        return str;
+    }
+
+
 
 
 }

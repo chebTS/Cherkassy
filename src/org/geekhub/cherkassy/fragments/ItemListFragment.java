@@ -44,6 +44,7 @@ public class ItemListFragment extends SherlockFragment {
         super.onStart();
         setHasOptionsMenu(true);
         category = getActivity().getIntent().getStringExtra("category");
+        getSherlockActivity().setTitle(category);
         getListFromDB("");
     }
 

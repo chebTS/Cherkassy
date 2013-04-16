@@ -1,18 +1,13 @@
 package org.geekhub.cherkassy.fragments;
 
-import org.geekhub.cherkassy.R;
-import org.geekhub.cherkassy.db.InfoContentProvider;
-import org.geekhub.cherkassy.db.InfoTable;
-
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -21,12 +16,14 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.db.ImageTable;
 import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
 import org.geekhub.cherkassy.helpers.ItemPageAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemFragment extends SherlockFragment {
 	private MapView mMapView;
@@ -49,6 +46,7 @@ public class ItemFragment extends SherlockFragment {
                 null);
         cursor1.moveToFirst();
         String category =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME));
+        getSherlockActivity().setTitle(category);
         TextView tw = (TextView) inflate.findViewById(R.id.item_title);
         tw.setText(category);
 
@@ -90,7 +88,15 @@ public class ItemFragment extends SherlockFragment {
                 null);
 
         cursor.moveToFirst();
-        ItemPageAdapter adapter = new ItemPageAdapter(getActivity(),cursor,inflater);
+        List<String> urlList = new ArrayList<String>();
+        for (int i=1;i<=cursor.getCount();i++) {
+            String imgLink = cursor.getString(cursor.getColumnIndex(ImageTable.COLUMN_URL));
+            urlList.add(imgLink);
+            cursor.moveToNext();
+            Log.e("1234",imgLink);
+        }
+
+        ItemPageAdapter adapter = new ItemPageAdapter(getActivity(),urlList,inflater);
         ViewPager myPager = (ViewPager) v.findViewById(R.id.itemviewpager);
         myPager.setAdapter(adapter);
     }

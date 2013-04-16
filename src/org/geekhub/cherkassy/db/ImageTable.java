@@ -43,8 +43,6 @@ public class ImageTable {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_URL,image.getImageURL());
         cv.put(COLUMN_ITEMID,image.getInfoID());
-        context.getContentResolver().insert(InfoContentProvider.IMG_URI, cv);
-
         Uri uri = context.getContentResolver().insert(InfoContentProvider.IMG_URI, cv);
         String id = uri.getLastPathSegment();
     }
