@@ -14,5 +14,9 @@
     
 	<string name="Nick">"NickName: "</string>
 	<string name="nick_hint">"Type your nick here"</string>
-    
+    <string name="about">"If you interested in partnership - you can contact us\n
+        				Stewiesh@gmail.com \n
+        				chebTS@gmail.com \n
+        				http://geekhub.ck.ua \n
+        				http://thegeekhub.org "</string>
 </resources>
