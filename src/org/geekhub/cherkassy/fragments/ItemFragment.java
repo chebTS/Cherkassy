@@ -1,11 +1,5 @@
 package org.geekhub.cherkassy.fragments;
 
-import org.geekhub.cherkassy.R;
-import org.geekhub.cherkassy.db.ImageTable;
-import org.geekhub.cherkassy.db.InfoContentProvider;
-import org.geekhub.cherkassy.db.InfoTable;
-import org.geekhub.cherkassy.helpers.ItemPageAdapter;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -19,16 +13,11 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.db.ImageTable;
 import org.geekhub.cherkassy.db.InfoContentProvider;
@@ -61,15 +50,23 @@ public class ItemFragment extends SherlockFragment {
         String category =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME));
         String description =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_DESCRIPTION));
         String address =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_ADDRESS));
-
+        String www =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_WEBSITEURL));
+        String email =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_EMAIL));
+        String phone =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_PHONE));
 
         getSherlockActivity().setTitle(category);
 
         TextView tw = (TextView) inflate.findViewById(R.id.item_title);
         TextView textView = (TextView) inflate.findViewById(R.id.txtDescription);
+        TextView wwwTV = (TextView) inflate.findViewById(R.id.txt_www);
+        TextView emailTV = (TextView) inflate.findViewById(R.id.txt_email);
+        TextView phoneTV = (TextView) inflate.findViewById(R.id.txt_phone);
 
         tw.setText(category);
         textView.setText(description);
+        wwwTV.setText("www: " + www);
+        emailTV.setText("Email: " + email);
+        phoneTV.setText("Phone: " + phone);
 
         ImagePager(item_id,inflater,inflate);
 
