@@ -3,5 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+    <LinearLayout 
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+	    <TextView 	        
+	        android:id="@+id/txtNickName"
+	        android:text="@string/Nick"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="18sp"/>
+	    <EditText 
+	        android:id="@+id/edtNick"
+	        android:lines="1"
+	        android:hint="@string/nick_hint"
+	        android:singleLine="true"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"/>
+	</LinearLayout>    
 </LinearLayout>
