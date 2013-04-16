@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.geekhub.cherkassy.R;
+import org.geekhub.cherkassy.db.ImageTable;
 import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
 import org.geekhub.cherkassy.helpers.ItemPageAdapter;
@@ -51,10 +52,7 @@ public class ItemFragment extends SherlockFragment {
         TextView tw = (TextView) inflate.findViewById(R.id.item_title);
         tw.setText(category);
 
-        ItemPageAdapter adapter = new ItemPageAdapter();
-        ViewPager myPager = (ViewPager) inflate.findViewById(R.id.itemviewpager);
-        myPager.setAdapter(adapter);
-        myPager.setCurrentItem(2);
+        ImagePager(item_id,inflater,inflate);
 
         if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity()) == 0){
             mMapView = (MapView) inflate.findViewById(R.id.map);
@@ -82,7 +80,20 @@ public class ItemFragment extends SherlockFragment {
         return inflate;
     }
 
+    private void ImagePager(long item_id, LayoutInflater inflater,View v) {
 
+        Cursor cursor = getSherlockActivity().getContentResolver().query(
+                InfoContentProvider.IMG_URI,
+                null,
+                ImageTable.COLUMN_ITEMID + "=" + item_id ,
+                null,
+                null);
+
+        cursor.moveToFirst();
+        ItemPageAdapter adapter = new ItemPageAdapter(getActivity(),cursor,inflater);
+        ViewPager myPager = (ViewPager) v.findViewById(R.id.itemviewpager);
+        myPager.setAdapter(adapter);
+    }
 
     @Override
     public void onStart() {

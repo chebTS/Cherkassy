@@ -9,13 +9,12 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="120dp">
 
 
         <android.support.v4.view.ViewPager
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/mc"
+                android:layout_height="match_parent"
                 android:id="@+id/itemviewpager"/>
 
         <TextView
