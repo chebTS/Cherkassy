@@ -16,17 +16,23 @@
         <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
             <!--suppress AndroidLintContentDescription -->
-            <ImageView
+<!--            <ImageView
                     android:id="@+id/imgLogo"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_span="2"
                     android:adjustViewBounds="true"
                     android:background="@drawable/ck_logo"/>
+                      -->
+             <android.support.v4.view.ViewPager
+				    android:id="@+id/pager"
+				    android:background="@android:color/darker_gray"
+				    android:layout_width="match_parent"
+				    android:layout_height="150dp" />
+				   
 
         </TableRow>
 
@@ -35,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center">
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="match_parent"
                          android:gravity="center_vertical"
@@ -63,7 +69,7 @@
 
             </FrameLayout>
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="match_parent"
                          android:gravity="center_vertical"
@@ -98,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center">
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="match_parent"
                          android:gravity="center_vertical"
@@ -127,7 +133,7 @@
             </FrameLayout>
 
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="match_parent"
                          android:gravity="center_vertical"
@@ -165,7 +171,7 @@
 
 
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="match_parent"
                          android:gravity="center_vertical"
@@ -195,7 +201,7 @@
 
 
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="match_parent"
                          android:gravity="center_vertical"

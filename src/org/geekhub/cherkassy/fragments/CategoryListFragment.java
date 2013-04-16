@@ -2,10 +2,12 @@ package org.geekhub.cherkassy.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import org.geekhub.cherkassy.R;
@@ -18,9 +20,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class CategoryListFragment extends SherlockFragment{
-
-
+	ViewPager pager;
     ArrayAdapter<String> adapter;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.category_list_frag,container,false);
@@ -32,8 +34,18 @@ public class CategoryListFragment extends SherlockFragment{
         super.onStart();
         setHasOptionsMenu(true);
         ParseToDB();
-
-
+        
+        pager = (ViewPager)getView().findViewById(R.id.pager);
+//        ImageView img = new ImageView(getSherlockActivity());
+//        img.setBackgroundDrawable(getResources().getDrawable(R.drawable.ck1));
+//        pager.addView(img);
+//        img = new ImageView(getSherlockActivity());
+//        img.setBackgroundDrawable(getResources().getDrawable(R.drawable.ck2));
+//        pager.addView(img);
+//        img = new ImageView(getSherlockActivity());
+//        img.setBackgroundDrawable(getResources().getDrawable(R.drawable.ck3));
+//        pager.addView(img);
+        
         //It needs refactoring
         TextView textView1 = (TextView) getView().findViewById(R.id.fastfoods);
         textView1.setOnClickListener(onButtonClick);
