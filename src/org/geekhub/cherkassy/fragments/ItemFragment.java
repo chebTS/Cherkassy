@@ -1,13 +1,17 @@
 package org.geekhub.cherkassy.fragments;
 
 import org.geekhub.cherkassy.R;
+import org.geekhub.cherkassy.db.ImageTable;
 import org.geekhub.cherkassy.db.InfoContentProvider;
 import org.geekhub.cherkassy.db.InfoTable;
+import org.geekhub.cherkassy.helpers.ItemPageAdapter;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +20,15 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.geekhub.cherkassy.R;
-import org.geekhub.cherkassy.db.ImageTable;
-import org.geekhub.cherkassy.db.InfoContentProvider;
-import org.geekhub.cherkassy.db.InfoTable;
-import org.geekhub.cherkassy.helpers.ItemPageAdapter;
 
 public class ItemFragment extends SherlockFragment {
 	private MapView mMapView;
@@ -38,17 +40,17 @@ public class ItemFragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View inflate = inflater.inflate(R.layout.item_frag, container, false);
-
-        long item_id =  getActivity().getIntent().getLongExtra("ID", 0);
-
-       Cursor cursor1 = getSherlockActivity().getContentResolver().query(
+        long item_id =  getActivity().getIntent().getLongExtra("ID", 0);        
+        Cursor cursor1 = getSherlockActivity().getContentResolver().query(
                 InfoContentProvider.CONTENT_URI,
                 null,
                 InfoTable.COLUMN_ID + "=" + item_id ,
                 null,
                 null);
         cursor1.moveToFirst();
+        
         String category =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME));
+        String address =  cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_ADDRESS));
         TextView tw = (TextView) inflate.findViewById(R.id.item_title);
         tw.setText(category);
 
@@ -59,24 +61,35 @@ public class ItemFragment extends SherlockFragment {
             mMapView.onCreate(mBundle);
             mMap = mMapView.getMap();
             mMap.setMyLocationEnabled(true);
-            Log.i("Points",Double.toString(cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LATITUDE))));
-            Log.i("Points",Double.toString(cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LONGITUDE))));
-            
+            double lat , lon;
+            lat  = cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LATITUDE));
+            lon  = cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LONGITUDE));
+            Log.i("Points",Double.toString(lat));
+            Log.i("Points",Double.toString(lon));
+            LatLng latLng = new LatLng(lat, lon);
             MarkerOptions mo = new MarkerOptions()
-                    .position(new LatLng(
-                            cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LATITUDE)),
-                            cursor1.getDouble(cursor1.getColumnIndex(InfoTable.COLUMN_LONGITUDE))))
-                    .title(cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_NAME)))
-                    .snippet(cursor1.getString(cursor1.getColumnIndex(InfoTable.COLUMN_ADDRESS)));
-            mMap.addMarker(mo);
-
+                    .position(latLng)
+                    .title(category)
+                    .snippet(address);
+            mMap.addMarker(mo);    
             try {
                 MapsInitializer.initialize(getSherlockActivity());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
+                mMap.animateCamera(cameraUpdate);
+                mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {					
+					@Override
+					public void onInfoWindowClick(Marker marker) {
+						String s = "geo:"+marker.getPosition().latitude+","+marker.getPosition().longitude+
+								"?q="+marker.getPosition().latitude+","+marker.getPosition().longitude+"("+marker.getTitle()+")";
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
+						startActivity(intent);
+					}
+				});
             } catch (GooglePlayServicesNotAvailableException e) {
                 e.printStackTrace();
             }
         }
-
+        cursor1.close();
         return inflate;
     }
 
@@ -95,12 +108,6 @@ public class ItemFragment extends SherlockFragment {
         myPager.setAdapter(adapter);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        
-    }
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +131,5 @@ public class ItemFragment extends SherlockFragment {
     public void onDestroy() {
         mMapView.onDestroy();
         super.onDestroy();
-    }
-
-    
+    }    
 }
