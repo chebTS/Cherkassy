@@ -31,6 +31,4 @@ public class SettingsFragment extends SherlockFragment {
 		nickPref = getSherlockActivity().getSharedPreferences(Const.NICK_TAG, 0);
 		nickPref.edit().putString(Const.NICK_TAG, edtNick.getText().toString()).commit();
 	}
-	
-	
 }
