@@ -21,6 +21,7 @@ public class Info {
         setName(data.getString("name"));
         setAddress(data.getString("Address"));
         setLogoURL(data.getString("logo"));
+        JSONArray JSONitem = data.getJSONArray("images");
         setPhone(data.getString("phone"));
         setEmail(data.getString("email"));
         setWebsiteURL(data.getString("websiteURL"));
@@ -30,8 +31,7 @@ public class Info {
 
         int id = InfoTable.saveArticleToDB(context,this);
 
-        JSONArray JSONitem = data.getJSONArray("images");
-        for (int i = 1; i < JSONitem.length(); i++) {
+        for (int i = 0; i < JSONitem.length(); i++) {
             new ImagesObj(JSONitem.getJSONObject(i),context,id);
         }
     }

@@ -1,7 +1,6 @@
 package org.geekhub.cherkassy.helpers;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -14,29 +13,30 @@ import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemor
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.geekhub.cherkassy.R;
-import org.geekhub.cherkassy.db.ImageTable;
 
 import java.io.File;
+import java.util.List;
 
 public class ItemPageAdapter extends PagerAdapter {
 
-    private Cursor c;
     private Context context;
+    private List<String> list;
     private LayoutInflater inflater;
 
-    public ItemPageAdapter(Context context,Cursor cursor, LayoutInflater inflater) {
+    public ItemPageAdapter(Context context,List<String> list, LayoutInflater inflater) {
         super();
-        c=cursor;
+        this.list = list;
         this.context = context;
         this.inflater = inflater;
     }
 
     @Override
     public int getCount() {
-        return c.getCount();
+        return list.size();
     }
 
     @Override
@@ -50,8 +50,8 @@ public class ItemPageAdapter extends PagerAdapter {
         View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
         ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
 
-        String imgLink = c.getString(c.getColumnIndex(ImageTable.COLUMN_URL));
-        displayImg(view,imgLink,imageView);
+
+        displayImg(view,list.get(position),imageView);
         ((ViewPager) view).addView(imageLayout, 0);
         return imageLayout;
     }
@@ -68,6 +68,7 @@ public class ItemPageAdapter extends PagerAdapter {
             File cacheDir = StorageUtils.getCacheDirectory(context);
 
             ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+
                     .threadPoolSize(4)
                     .threadPriority(6)
                     .imageDownloader(new BaseImageDownloader(context))
@@ -85,6 +86,7 @@ public class ItemPageAdapter extends PagerAdapter {
                     .showImageForEmptyUri(R.drawable.ck_logo)
                     .showImageOnFail(R.drawable.ck_logo)
                     .cacheInMemory()
+                    .imageScaleType(ImageScaleType.NONE)
                     .cacheOnDisc()
                     .build();
 

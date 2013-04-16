@@ -9,7 +9,7 @@
             android:layout_height="fill_parent"
             android:maxWidth="600dp"
             android:maxHeight="200dp"
-            android:adjustViewBounds="true"
+
 />
 
 
