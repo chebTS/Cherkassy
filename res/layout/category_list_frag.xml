@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<org.geekhub.cherkassy.helpers.CustomScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -12,29 +12,25 @@
             android:shrinkColumns="*"
             android:stretchColumns="*"
             android:background="#FFFFFF">
-
-        <TableRow
+            
+		<android.support.v4.view.ViewPager
+			    android:id="@+id/pager"
+			    android:background="@android:color/darker_gray"
+			    android:layout_width="match_parent"
+			    android:layout_height="150dp" />
+  <!--         <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center">
-
-            <!--suppress AndroidLintContentDescription -->
-<!--            <ImageView
+            suppress AndroidLintContentDescription 
+         <ImageView
                     android:id="@+id/imgLogo"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_span="2"
                     android:adjustViewBounds="true"
                     android:background="@drawable/ck_logo"/>
-                      -->
-             <android.support.v4.view.ViewPager
-				    android:id="@+id/pager"
-				    android:background="@android:color/darker_gray"
-				    android:layout_width="match_parent"
-				    android:layout_height="150dp" />
-				   
-
-        </TableRow>
+        </TableRow>-->
 
         <TableRow
                 android:layout_width="fill_parent"
@@ -233,4 +229,4 @@
 
     </TableLayout>
 
-</ScrollView>
+</org.geekhub.cherkassy.helpers.CustomScrollView>

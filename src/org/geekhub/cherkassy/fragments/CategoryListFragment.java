@@ -1,50 +1,95 @@
 package org.geekhub.cherkassy.fragments;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockFragment;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.ItemListActivity;
+import org.geekhub.cherkassy.helpers.HomeAdapter;
 import org.geekhub.cherkassy.helpers.JSONDataLoading;
 import org.geekhub.cherkassy.helpers.JSONParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockFragment;
 
 public class CategoryListFragment extends SherlockFragment{
-	ViewPager pager;
-    ArrayAdapter<String> adapter;
+	private ViewPager pager;
+	//private  ArrayAdapter<String> adapter;
+    private boolean pagerMoved = false;
+    private static final long ANIM_VIEWPAGER_DELAY = 3000;
+    private Handler h = new Handler();
+    
+    private Runnable animateViewPager = new Runnable() {
+        public void run() {
+            if (!pagerMoved) {
+            	if (pager.getCurrentItem() != pager.getChildCount()){
+            		pager.setCurrentItem(pager.getCurrentItem()+1, true);
+            	}else{
+            		pager.setCurrentItem(0, true);
+            	}
+                h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+            }
+        }
+    };
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.category_list_frag,container,false);
     }
 
+    
 
     @Override
+	public void onPause() {
+		super.onPause();
+		if (h != null) {
+            h.removeCallbacks(animateViewPager);
+        }
+	}
+
+
+
+//	@Override
+//	public void onStop() {
+//		super.onStop();
+//		if (h != null) {
+//            h.removeCallbacks(animateViewPager);
+//        }
+//	}
+
+
+
+	@Override
     public void onStart() {
         super.onStart();
         setHasOptionsMenu(true);
         ParseToDB();
         
         pager = (ViewPager)getView().findViewById(R.id.pager);
-//        ImageView img = new ImageView(getSherlockActivity());
-//        img.setBackgroundDrawable(getResources().getDrawable(R.drawable.ck1));
-//        pager.addView(img);
-//        img = new ImageView(getSherlockActivity());
-//        img.setBackgroundDrawable(getResources().getDrawable(R.drawable.ck2));
-//        pager.addView(img);
-//        img = new ImageView(getSherlockActivity());
-//        img.setBackgroundDrawable(getResources().getDrawable(R.drawable.ck3));
-//        pager.addView(img);
+        List<Integer> drawList = new ArrayList<Integer>();
+        drawList.add(R.drawable.ck1);
+        drawList.add(R.drawable.ck2);
+        drawList.add(R.drawable.ck3);
+        HomeAdapter adapter = new HomeAdapter(getSherlockActivity().getSupportFragmentManager(), drawList);
+        try{
+        	pager.setAdapter(adapter);
+        }catch (IllegalStateException e){
+        	e.printStackTrace();
+        }
+        
+        h.removeCallbacks(animateViewPager);
+        h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
         
         //It needs refactoring
         TextView textView1 = (TextView) getView().findViewById(R.id.fastfoods);
@@ -89,6 +134,9 @@ public class CategoryListFragment extends SherlockFragment{
                 case R.id.others:
                     intent.putExtra("category","other");
                     break;
+            }
+            if (h != null) {
+                h.removeCallbacks(animateViewPager);
             }
             startActivity(intent);
         }

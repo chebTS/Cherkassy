@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -16,7 +17,7 @@ public class HomePagerFragment extends SherlockFragment {
 	int pageNumber;
 	int drawable;
 	
-	static HomePagerFragment newInstance(int page, int drawable) {
+	public static HomePagerFragment newInstance(int page, int drawable) {
 		HomePagerFragment pageFragment = new HomePagerFragment();
 	    Bundle arguments = new Bundle();
 	    arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
@@ -36,8 +37,8 @@ public class HomePagerFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.item_home_pager, null);
-		
-		return super.onCreateView(inflater, container, savedInstanceState);
+		((ImageView)v).setBackgroundDrawable(getResources().getDrawable(drawable));
+		return v;
 	}
 	
 	
