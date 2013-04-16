@@ -6,12 +6,14 @@ import java.io.InputStream;
 import org.geekhub.cherkassy.R;
 import org.geekhub.cherkassy.activity.MapActivity;
 import org.geekhub.cherkassy.email.MailSenderClass;
+import org.geekhub.cherkassy.objects.Const;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,15 +44,16 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	private static final int SELECT_CAMERA = 101;
 	private static final int SELECT_GALERY = 102;
 	private static final int SELECT_MAP = 103;
-	ImageView imgPhoto;
-	TextView txtLatLng;
-	Button btnSend;
-	EditText edtDescription;
-	SherlockFragmentActivity actReport;
-	Uri imageUri;
-	Double lat, lng;
-	AlertDialog.Builder ad;
-	String attachFilePath;
+	private ImageView imgPhoto;
+	private TextView txtLatLng;
+	private Button btnSend;
+	private EditText edtDescription;
+	private SherlockFragmentActivity actReport;
+	private Uri imageUri;
+	private Double lat, lng;
+	private AlertDialog.Builder ad;
+	private String attachFilePath;
+	private SharedPreferences nickPref;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,9 +103,13 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 				from = "chebTS@gmail.com";
 				where = "chebTS@gmail.com";		
 				title = "Cherkassy report";
-				text = "On location " + txtLatLng.getText().toString()+
-						"\nThere is an issue \n"
-						+ edtDescription.getText().toString();
+				nickPref = getSherlockActivity().getSharedPreferences(Const.NICK_TAG, 0);
+				text = "On location " 
+						+ txtLatLng.getText().toString()
+						+"\nThere is an issue \n"
+						+ edtDescription.getText().toString()
+						+"\n\nReported by "+ nickPref.getString(Const.NICK_TAG, "Unknown");
+				
 				attach = attachFilePath;
 				try {
 					MailSenderClass sender = new MailSenderClass("CkGuideGeek@gmail.com", "CK2Android");
@@ -166,7 +173,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	}
 	
 	public static boolean isConnectingToInternet(Activity activity){
-        ConnectivityManager connectivity = (ConnectivityManager) activity.getSystemService(activity.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivity = (ConnectivityManager) activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
           if (connectivity != null){
               NetworkInfo[] info = connectivity.getAllNetworkInfo();
               if (info != null){
