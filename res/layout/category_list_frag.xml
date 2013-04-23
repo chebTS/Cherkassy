@@ -42,6 +42,235 @@
                         android:paddingTop="70dp"
                         android:text="Fastfood"
                         android:id="@+id/fastfoods"
+                        android:background="#9662A9"/>
+
+                <ImageView
+                        android:background="@drawable/fast_food"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+
+            </FrameLayout>
+
+            <FrameLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:paddingTop="70dp"
+                        android:text="Restaurants"
+                        android:id="@+id/restaurants"
+                        android:background="#F5B22F"/>
+
+                <ImageView
+                        android:background="@drawable/restaurant"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>/>
+
+            </FrameLayout>
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+            <FrameLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Movie"
+                        android:paddingTop="70dp"
+                        android:id="@+id/cinemas"
+                        android:background="#209BD6"/>
+
+                <ImageView
+                        android:background="@drawable/movie"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>/>
+
+            </FrameLayout>
+
+
+            <FrameLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:paddingTop="70dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Hotels"
+                        android:id="@+id/hotels"
+                        android:background="#7CBF45"/>
+
+                <ImageView
+                        android:background="@drawable/hotel"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>/>
+
+            </FrameLayout>
+
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+
+
+            <FrameLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:paddingTop="70dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Universities"
+                        android:id="@+id/universities"
+                        android:background="#F15921"/>
+
+                <ImageView
+                        android:background="@drawable/universities"
+                        android:layout_marginBottom="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>/>
+
+            </FrameLayout>
+
+
+
+            <FrameLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="match_parent"
+                         android:gravity="center_vertical"
+                         android:padding="5dp"
+                         android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:paddingTop="70dp"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Other"
+                        android:id="@+id/others"
+                        android:background="#800517"/>
+
+                <ImageView
+                        android:background="@drawable/other"
+                        android:layout_marginBottom="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>/>
+
+            </FrameLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+</org.geekhub.cherkassy.helpers.CustomScrollView>
+
+<!-- BackUp
+<?xml version="1.0" encoding="utf-8"?>
+
+<org.geekhub.cherkassy.helpers.CustomScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
+            android:background="#000000">
+            
+		<android.support.v4.view.ViewPager
+			    android:id="@+id/pager"
+			    android:background="@android:color/darker_gray"
+			    android:layout_width="match_parent"
+			    android:layout_height="150dp" />
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:orientation="horizontal" >
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:paddingTop="70dp"
+                        android:text="Fastfood"
+                        android:id="@+id/fastfoods"
                         android:background="#ed8515"></TextView>
 
                 <ImageView
@@ -225,3 +454,5 @@
     </TableLayout>
 
 </org.geekhub.cherkassy.helpers.CustomScrollView>
+
+ -->

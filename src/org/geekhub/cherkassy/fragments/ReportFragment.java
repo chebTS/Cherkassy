@@ -46,7 +46,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	private static final int SELECT_MAP = 103;
 	private ImageView imgPhoto;
 	private TextView txtLatLng;
-	private Button btnSend;
+	private Button btnSend, btnOpenMap;
 	private EditText edtDescription;
 	private SherlockFragmentActivity actReport;
 	private Uri imageUri;
@@ -66,8 +66,11 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		btnSend.setOnClickListener(this);
+		btnOpenMap.setOnClickListener(this);
 		imgPhoto.setOnClickListener(this);
 		actReport = getSherlockActivity();
+
+		//txtLatLng.setOnClickListener(this);
 	}
 
 	@Override
@@ -75,8 +78,8 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		View v = inflater.inflate(R.layout.report_frag,container,false);
 		imgPhoto = (ImageView)v.findViewById(R.id.imgPhoto);
 		btnSend  = (Button)v.findViewById(R.id.btnSend);
+		btnOpenMap  = (Button)v.findViewById(R.id.btnOpenMap);
 		txtLatLng = (TextView)v.findViewById(R.id.txtLatLng);
-		txtLatLng.setOnClickListener(this);
 		edtDescription = (EditText)v.findViewById(R.id.edtDescription);
         return v;
     }
@@ -143,7 +146,7 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 		case R.id.imgPhoto:
 			showPhotoDialog();
 			break;
-		case R.id.txtLatLng:
+		case R.id.btnOpenMap:
 			startActivityForResult(new Intent(getSherlockActivity(), MapActivity.class), SELECT_MAP);
 			break;						
 		default:

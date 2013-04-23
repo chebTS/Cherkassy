@@ -40,18 +40,31 @@
 	            android:layout_alignParentLeft="true"
 	            android:layout_alignParentTop="true"
 	            android:layout_margin="5dp"
-	            android:layout_toLeftOf="@+id/btnSend"
-	            android:lines="5" />
+	            android:layout_toLeftOf="@+id/llButtons"
+	            android:lines="6" />
 		
-	         <Button
-	            android:padding="20dp" 
-	            android:layout_centerVertical="true"
-	            android:layout_alignParentRight="true"
-		        android:id="@+id/btnSend"
-		        android:background="@android:drawable/ic_menu_send"
-		        android:layout_gravity="center_horizontal"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"/>
+	        	<LinearLayout 
+	        	    android:layout_centerVertical="true"
+	        	    android:layout_alignParentRight="true"
+	        	    android:id="@+id/llButtons"
+	        	    android:orientation="vertical"
+	        	    android:layout_width="wrap_content"	        	    
+	        	    android:layout_height="wrap_content">
+	        	    
+	        	 <Button
+		            android:padding="20dp" 
+			        android:id="@+id/btnOpenMap"
+			        android:background="@drawable/position_big"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"/>   
+	        	
+		         <Button
+		            android:padding="20dp" 
+			        android:id="@+id/btnSend"
+			        android:background="@drawable/send"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"/>
+		        </LinearLayout>
 	    </RelativeLayout>
 	    
 	   
