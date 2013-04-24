@@ -101,9 +101,10 @@ public class ItemListAdapter extends SimpleCursorAdapter {
         String str;
 
         if (distance < 1000) {
-           str = Double.toString(distance) + " meters";
+           str = Double.toString(Math.round(distance)) + " meters";
         } else {
-           str = "~" +  Double.toString(Math.round(distance/1000)) + "km";
+           Double kmdistance = Double.valueOf(Math.round(distance/100))/10;
+           str = "~" +  Double.toString(kmdistance) + " km";
         }
         return str;
     }
