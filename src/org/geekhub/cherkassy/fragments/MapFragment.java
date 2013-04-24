@@ -73,6 +73,8 @@ public class MapFragment extends SherlockFragment  implements LocationListener{
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
         mMap.animateCamera(cameraUpdate);
+        mMap.addMarker(new MarkerOptions().position(latLng).snippet("Location"));
+        mapActivity.setIssuePosition(latLng);
         locationManager.removeUpdates(this);
     }
 

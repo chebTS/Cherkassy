@@ -45,7 +45,7 @@
                         android:background="#9662A9"/>
 
                 <ImageView
-                        android:background="@drawable/fast_food"
+                        android:background="@drawable/fast_food2"
                         android:layout_marginBottom="20dp"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                         android:background="#F5B22F"/>
 
                 <ImageView
-                        android:background="@drawable/restaurant"
+                        android:background="@drawable/restaurant2"
                         android:layout_marginBottom="20dp"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                         android:background="#209BD6"/>
 
                 <ImageView
-                        android:background="@drawable/movie"
+                        android:background="@drawable/movie2"
                         android:layout_marginBottom="20dp"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                         android:background="#7CBF45"/>
 
                 <ImageView
-                        android:background="@drawable/hotel"
+                        android:background="@drawable/hotel2"
                         android:layout_marginBottom="20dp"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                         android:background="#F15921"/>
 
                 <ImageView
-                        android:background="@drawable/universities"
+                        android:background="@drawable/universities2"
                         android:layout_marginBottom="20dp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
@@ -211,7 +211,7 @@
                         android:background="#800517"/>
 
                 <ImageView
-                        android:background="@drawable/other"
+                        android:background="@drawable/other2"
                         android:layout_marginBottom="20dp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
