@@ -74,7 +74,7 @@ public class ItemPageAdapter extends PagerAdapter {
                     .imageDownloader(new BaseImageDownloader(context))
                     .denyCacheImageMultipleSizesInMemory()
                     .offOutOfMemoryHandling()
-                    .memoryCache(new UsingFreqLimitedMemoryCache(10 * 1024 * 1024)) // 2 Mb
+                    .memoryCache(new UsingFreqLimitedMemoryCache(10 * 1024 * 1024)) // 10 Mb
                     .discCache(new UnlimitedDiscCache(cacheDir))
                     .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
                     .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
