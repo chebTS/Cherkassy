@@ -156,8 +156,8 @@ public class ReportFragment extends SherlockFragment implements OnClickListener{
 	
 	private void showPhotoDialog(){
 		ad = new AlertDialog.Builder(getSherlockActivity());
-		ad.setTitle("Choose source");  // заголовок
-		ad.setMessage("Camera or gallery"); // сообщение
+		ad.setTitle("Choose source");  // 
+		ad.setMessage("Camera or gallery"); // 
 		ad.setCancelable(true);
 		ad.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
 			@Override
