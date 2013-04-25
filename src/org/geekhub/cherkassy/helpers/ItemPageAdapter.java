@@ -72,6 +72,8 @@ public class ItemPageAdapter extends PagerAdapter {
                     .discCacheExtraOptions(600, 200, Bitmap.CompressFormat.PNG, 75) // width, height, compress format, quality
                     .imageDownloader(new BaseImageDownloader(context))
                     .denyCacheImageMultipleSizesInMemory()
+                    .threadPoolSize(4)
+                    .threadPriority(6)
                     .offOutOfMemoryHandling()
                     .memoryCache(new UsingFreqLimitedMemoryCache(10 * 1024 * 1024)) // 10 Mb
                     .discCache(new UnlimitedDiscCache(cacheDir))
@@ -85,7 +87,7 @@ public class ItemPageAdapter extends PagerAdapter {
                     .showImageForEmptyUri(R.drawable.ck_logo)
                     .showImageOnFail(R.drawable.ck_logo)
                     .cacheInMemory()
-                    //.bitmapConfig(Bitmap.Config.RGB_565)
+                   // .bitmapConfig(Bitmap.Config.RGB_565)
                     .cacheOnDisc()
                     .build();
 
