@@ -56,7 +56,7 @@ public class ItemListAdapter extends SimpleCursorAdapter {
 
             ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                     .memoryCacheExtraOptions(120, 80) // width, height
-                    .discCacheExtraOptions(120, 80, Bitmap.CompressFormat.JPEG, 75) // width, height, compress format, quality
+                    .discCacheExtraOptions(120, 80, Bitmap.CompressFormat.PNG, 75) // width, height, compress format, quality
                     .threadPoolSize(4)
                     .threadPriority(6)
                     .imageDownloader(new BaseImageDownloader(context))

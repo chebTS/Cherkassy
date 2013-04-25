@@ -1,6 +1,7 @@
 package org.geekhub.cherkassy.helpers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemor
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.geekhub.cherkassy.R;
@@ -68,9 +68,8 @@ public class ItemPageAdapter extends PagerAdapter {
             File cacheDir = StorageUtils.getCacheDirectory(context);
 
             ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-
-                    .threadPoolSize(4)
-                    .threadPriority(6)
+                    .memoryCacheExtraOptions(600, 200) // width, height
+                    .discCacheExtraOptions(600, 200, Bitmap.CompressFormat.PNG, 75) // width, height, compress format, quality
                     .imageDownloader(new BaseImageDownloader(context))
                     .denyCacheImageMultipleSizesInMemory()
                     .offOutOfMemoryHandling()
@@ -86,7 +85,7 @@ public class ItemPageAdapter extends PagerAdapter {
                     .showImageForEmptyUri(R.drawable.ck_logo)
                     .showImageOnFail(R.drawable.ck_logo)
                     .cacheInMemory()
-                    .imageScaleType(ImageScaleType.NONE)
+                    //.bitmapConfig(Bitmap.Config.RGB_565)
                     .cacheOnDisc()
                     .build();
 
